@@ -1,0 +1,162 @@
+\usepackage{%
+	amsfonts,%
+	amsmath,%	
+	amssymb,%
+	amsthm,%
+	babel,%
+	bbm,%
+	biblatex,%
+	caption,%
+	centernot,%
+	color,%
+	enumerate,%
+	%enumitem,%
+	epsfig,%
+	epstopdf,%
+	etex,%
+	%framed,%
+	fullpage,%
+	%geometry,%
+	graphicx,%
+	hyperref,%
+	latexsym,%
+	mathptmx,%
+	mathtools,%
+	multicol,%
+	pgf,%
+	pgfplots,%
+	pgfplotstable,%
+	pgfpages,%
+	proof,%
+	psfrag,%
+	subfigure,%	
+	tikz,%
+	times,%
+	ulem,%
+	url,%
+	xcolor%
+}
+
+\usepackage[margin=1in,top=0.75in]{geometry}
+\usepackage[mathscr]{eucal}
+\usepgflibrary{shapes}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{%
+  arrows,%
+  backgrounds,%
+  chains,%
+  decorations.pathmorphing,% /pgf/decoration/random steps | erste Graphik
+  decorations.text,% 
+  matrix,%
+  positioning,% wg. " of "
+  fit,%
+  patterns,%
+  petri,%
+  plotmarks,%
+  scopes,%
+  shadows,%
+  shapes.misc,% wg. rounded rectangle
+  shapes.arrows,%
+  shapes.callouts,%
+  shapes%
+}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{assum}[thm]{Assumptions}
+
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+\newtheorem{note}{Note}
+
+%\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\Real}{\mathbb{R}}
+
+\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\meq}[2]{\begin{xalignat*}{#1}#2\end{xalignat*}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\expect}[1]{\mathbb{E}\left[{#1}\right]}
+\newcommand{\prob}[1]{\mathbb{P}\left[{#1}\right]}
+\newcommand{\given}{\; \big\vert \;} 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\H}{\mathscr{H}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sE}{\mathscr{E}}
+
+% a few handy macros
+
+\newcommand\matlab{{\sc matlab}}
+\newcommand{\goto}{\rightarrow}
+\newcommand{\bigo}{{\mathcal O}}
+%\newcommand{\half}{\frac{1}{2}}
+%\newcommand\implies{\quad\Longrightarrow\quad}
+\newcommand\reals{{{\rm l} \kern -.15em {\rm R} }}
+\newcommand\complex{{\raisebox{.043ex}{\rule{0.07em}{1.56ex}} \hskip -.35em {\rm C}}}
+
+
+% macros for matrices/vectors:
+
+% matrix environment for vectors or matrices where elements are centered
+\newenvironment{mat}{\left[\begin{array}{ccccccccccccccc}}{\end{array}\right]}
+\newcommand\bcm{\begin{mat}}
+\newcommand\ecm{\end{mat}}
+
+% matrix environment for vectors or matrices where elements are right justifvied
+\newenvironment{rmat}{\left[\begin{array}{rrrrrrrrrrrrr}}{\end{array}\right]}
+\newcommand\brm{\begin{rmat}}
+\newcommand\erm{\end{rmat}}
+
+% for left brace and a set of choices
+%\newenvironment{choices}{\left\{ \begin{array}{ll}}{\end{array}\right.}
+\newcommand\when{&\text{if~}}
+\newcommand\otherwise{&\text{otherwise}}
+% sample usage:
+%  \delta_{ij} = \begin{choices} 1 \when i=j, \\ 0 \otherwise \end{choices}
+
+
+% for labeling and referencing equations:
+\newcommand{\eql}{\begin{equation}\label}
+\newcommand{\eqn}[1]{(\ref{#1})}
+% can then do
+%  \eql{eqnlabel}
+%  ...
+%  \end{equation}
+% and refer to it as equation \eqn{eqnlabel}.  
+
+
+% some useful macros for finite difference methods:
+\newcommand\unp{U^{n+1}}
+\newcommand\unm{U^{n-1}}
+
+% for chemical reactions:
+\newcommand{\react}[1]{\stackrel{K_{#1}}{\rightarrow}}
+\newcommand{\reactb}[2]{\stackrel{K_{#1}}{~\stackrel{\rightleftharpoons}
+   {\scriptstyle K_{#2}}}~}
+
+
+\makeatletter
+\def\th@plain{%
+  \thm@notefont{}% same as heading font
+  \itshape % body font
+}
+\def\th@definition{%
+  \thm@notefont{}% same as heading font
+  \normalfont % body font
+}
+\makeatother
+\date{}
