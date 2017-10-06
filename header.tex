@@ -89,57 +89,39 @@
 \newcommand{\meq}[2]{\begin{xalignat*}{#1}{#2}\end{xalignat*}}
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\indep}{\!\perp\!\!\!\perp}
+\newcommand{\expect}[1]{\mathbb{E}\left[{#1}\right]}
+\newcommand{\prob}[1]{\mathbb{P}\left[{#1}\right]}
+\newcommand{\given}{\; \big\vert \;} 
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}%
 %\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
 \newcommand{\tr}{\operatorname{tr}}
 \newcommand{\Var}{\operatorname{Var}}
 \newcommand{\Cov}{\operatorname{Cov}}
-\renewcommand{\P}{\mathbb{P}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\E}{\mathbb{E}}
-\newcommand{\Z}{\mathbb{Z}}
 \newcommand{\D}{\mathbb{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cG}{\mathcal{G}}
+
 \newcommand{\B}{\mathscr{B}}
-\newcommand{\C}{\mathcal{C}}
-\newcommand{\T}{\mathscr{T}}
-\newcommand{\F}{\mathscr{F}}
 \newcommand{\sE}{\mathscr{E}}
-\renewcommand{\L}{\mathscr{L}}
-\newcommand{\G}{\mathcal{G}}
+\newcommand{\sF}{\mathscr{F}}
+\newcommand{\sH}{\mathscr{H}}
+\newcommand{\sL}{\mathscr{L}}
 \newcommand{\sS}{\mathscr{S}}
+\newcommand{\sT}{\mathscr{T}}
+\newcommand{\sX}{\mathscr{X}}
 %\newcommand{\ba}{\begin{align*}}
 %\newcommand{\ea}{\end{align*}}
 
 % Debug
 \newcommand{\todo}[1]{\begin{color}{blue}{{\bf~[TODO:~#1]}}\end{color}}
-=======
 
-\theoremstyle{remark}
-\newtheorem{rem}{Remark}
-\newtheorem{note}{Note}
-
-%\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\newcommand{\tr}{\operatorname{tr}}
-\newcommand{\Var}{\operatorname{Var}}
-\newcommand{\Cov}{\operatorname{Cov}}
-\newcommand{\Real}{\mathbb{R}}
-
-\newcommand{\eq}[1]{\begin{align*}#1\end{align*}}
-\newcommand{\meq}[2]{\begin{xalignat*}{#1}#2\end{xalignat*}}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\newcommand{\expect}[1]{\mathbb{E}\left[{#1}\right]}
-\newcommand{\prob}[1]{\mathbb{P}\left[{#1}\right]}
-\newcommand{\given}{\; \big\vert \;} 
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\E}{\mathbb{E}}
-\renewcommand{\H}{\mathscr{H}}
-\renewcommand{\P}{\mathbb{P}}
-\newcommand{\sF}{\mathscr{F}}
-\newcommand{\sE}{\mathscr{E}}
 
 % a few handy macros
 
@@ -190,7 +172,6 @@
 \newcommand{\react}[1]{\stackrel{K_{#1}}{\rightarrow}}
 \newcommand{\reactb}[2]{\stackrel{K_{#1}}{~\stackrel{\rightleftharpoons}
    {\scriptstyle K_{#2}}}~}
->>>>>>> 9da90ae4981e432421c66ce67e402e0184d8fdd5
 
 
 \makeatletter
