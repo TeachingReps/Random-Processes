@@ -2,35 +2,45 @@
 % !TEX spellcheck = LaTeX
 \documentclass[letterpaper,10pt,english]{article}
 \input{header}
-\title{Lecture-13: Random Processes}
+\title{Lecture-20: Random Processes}
 \author{}
 
 \begin{document}
 \maketitle
 
-\section{Stochastic Processes}
+\section{Stochastic Processes} 
+
 %\begin{defn} 
-A  collection of random variables $\{X_t \in \sX: t \in T\}$ each defined on the same probability space $(\Omega, \sF, P)$ is called a \textbf{random process} for an arbitrary index set $T$ and arbitrary state space $\sX$. 
+Let $(\Omega, \sF, P)$ be a probability space. 
+For an arbitrary index set $T$ and state space $\sX \subseteq \R$, a \textbf{random process} is a measurable map $X : (\Omega, T) \to \sX$. 
+For each $t \in T$, we have $X_t \triangleq \{X(t, \omega): \omega \in \Omega\}$ is a random variable defined on the probability space $(\Omega, \sF, P)$, 
+and random process $X$ is a collection of random variables $X = (X_t \in \sX: t \in T)$. 
+For each $\omega \in \Omega$, we have a sample path $X_{\omega} \triangleq (X_t(\omega): t \in T)$ of the process $X$. 
+
+%each defined on the same probability space $(\Omega, \sF, P)$ is called a \textbf{random process} 
 %\end{defn}
 
 \subsection{Classification}
-If the state space $T$ is countable, the stochastic process is called \textbf{discrete}-time stochastic process or random sequence. 
-When the state space $T$ is uncountable, it is called \textbf{continuous}-time stochastic process. 
-However, $T$ doesn't have to be time, if the index set is space, and then the stochastic process is spatial process. 
+State space $\sX$ can be countable or uncountable, corresponding to discrete or continuous valued process.  
+If the index set $T$ is countable, the stochastic process is called \textbf{discrete}-time stochastic process or random sequence. 
+When the index set $T$ is uncountable, it is called \textbf{continuous}-time stochastic process. 
+The index set $T$ doesn't have to be time, if the index set is space, and then the stochastic process is spatial process. 
 When $T = \R^n \times [0, \infty)$, stochastic process $X(t)$ is a spatio-temporal process. 
-State space $\mathcal{X}$ can also be countable or uncountable. 
 \begin{shaded*}
+\begin{exmp}
 We list some examples of each such stochastic process. 
-\begin{itemize} 
+\begin{enumerate}[i\_]
 \item Discrete random sequence: brand switching, discrete time queues, number of people at bank each day.
 \item Continuous random sequence: stock prices, currency exchange rates, waiting time in queue of $n$th arrival, workload at arrivals in time sharing computer systems.
 \item Discrete random process:  counting processes, population sampled at birth-death instants, number of people in queues.
 \item Continuous random process: water level in a dam, waiting time till service in a queue, location of a mobile node in a network.
-\end{itemize}
+\end{enumerate}
+\end{exmp}
 \end{shaded*}
 
 \subsection{Specification}
-To define a measure on collection of random variables, we need to know it's joint distribution $F: \R^T \to [0,1]$. 
+To define a measure on a random process, we can either put a measure on sample paths, or equip the collection of random variables with a joint measure. 
+We adopt the second approach, and try to identify the joint distribution $F: \R^T \to [0,1]$. 
 To this end, for any $x \in \R^T$we need to know
 \begin{align*}
 F(x) = P\left(\displaystyle {\bigcap_{t \in T}\{\omega \in \Omega: X_t(\omega) \leq x_t\}}\right).
@@ -50,7 +60,9 @@ That is, the first moment such as mean, and the second moment such as correlatio
 \begin{xalignat*}{5}
 &m_X(t) \triangleq \E X_t, && R_X(t,s) \triangleq \E X_tX_s,&& C_X(t,s) \triangleq \E (X_t - m_X(t))(X_s-m_X(s)).
 \end{xalignat*}
+
 \begin{shaded*}
+\begin{exmp}
 Some examples of simple stochastic processes. 
 \begin{enumerate}[i\_]
 \item $X_t = A \cos 2\pi t$, where $A$ is random. 
@@ -74,6 +86,7 @@ The moments are given by
 \item $X_n = U^n$ for $n \in \N$, where $U$ is uniformly distributed in the open interval $(0,1)$.
 \item $Z_t = At +B$ where $A$ and $B$ are independent random variables. 
 \end{enumerate}
+\end{exmp}
 \end{shaded*}
 
 \subsection{Independence}
@@ -85,11 +98,43 @@ Random variables $X,Y$ defined on the above probability space, are \textbf{indep
 \begin{align*}
 P\{X(\omega) \leq x, Y(\omega) \leq y\} = P\{X(\omega) \leq x\}P\{Y(\omega) \leq y\}.
 \end{align*}
-Two stochastic process $X_t, Y_t$ for common index set $T$ are \textbf{independent stochastic processes} if for all %$m,n \in \N$ and 
+A stochastic process $X$ is said to be \textbf{independent} if for all finite subsets $S \subseteq T$, we have
+\eq{
+P(\{X_s \leq  x_s, s \in S\}) = \prod_{s \in S}P\{X_s \leq x_s\}. 
+}
+Two stochastic process $X, Y$ for the common index set $T$ are \textbf{independent random processes} if for all %$m,n \in \N$ and 
 finite subsets $I, J \subseteq T$ %such that $|I| =m, |J| = n$, 
 \begin{align*}
 P\left(\{X_i \leq x_i, i \in I \}\cap\{Y_j \leq y_j, j \in J\}\right) = P\left(\{X_i \leq x_i, i \in I\}\right)P\left(\{Y_j \leq y_j, j \in J\}\right).
 \end{align*}
+
+\subsection{Conditional Expectation and Filtration} 
+Let $(\Omega, \sF, P)$ be the probability space.  
+Let $X$ be a measurable random variable on this probability space denoted as $X \in \sF$, 
+if the event $X^{-1}(-\infty, x] = \{\omega \in \Omega: X(\omega) \leq x\} \in \sF$ for each $x \in \R$.  
+Let $\sE \subseteq \sF$ be a $\sigma$-algebra, then the \textbf{conditional expectation} of $X$ given $\sE$ is denoted $\E[X | \sE]$ and is a random variable $Y = \E[X | \sE]$ such that $Y \in \sE$ and for each event $A \in \sE$
+\eq{
+\int_A X dP &= \int_A Y dP. 
+}Intuitively, we think of the $\sigma$-algebra $\sE$ as describing the information we have. 
+For each $A \in \sE$, we know whether or not $A$ has occurred. 
+The conditional expectation $\E[X|\sE]$ is then the ``best guess'' of the value of $X$ given the information $\sE$. 
+In particular, if $X \in \sE$ then $\E[X| \sE] = X$. 
+A random variable $X$ is independent of the $\sigma$-algebra $\sE$, if for all $x \in \R$ and $A \in \sE$, 
+\eq{
+P\{X \leq x\}\cap A = P\{X \leq x\}P(A). 
+}
+In this case, $\E[X| \sE]  = \E[X]$. 
+This follows since $\E X \in \sE$ and the random variables $X$ and $1_{A}$ are independent for any $A \in \sE$, 
+which implies 
+\eq{
+\int_{A}X dP = \E[X1_A] = \E X P(A) = \int_{A}\E X dP. 
+}
+
+A net of $\sigma$-algebras $\{\sF_i \subseteq \sF: i \in I\}$ is called a \textbf{filtration} when the index set $I$ is totally ordered and the net is increasing, that is for all $i \leqslant j \in I$ implies $\sF_i \subseteq \sF_j$. 
+For a random process $X$ with an ordered index set $T$, we can define a filtration indexed by $T$, such that $\sF_t$ is the information about the process till index $t$, and 
+\eq{
+\sF_t &\triangleq \sigma(X_s, s \leqslant t).
+}
 
 \subsection{Examples of Tractable Stochastic Processes}
 In general, it is very difficult to characterize a stochastic process completely in terms of its finite dimensional distribution. 
@@ -122,7 +167,7 @@ Since $X_t = X_0$ and $(X_t,X_s) = (X_{t-s}, X_{0})$ in distribution, we have
 A stochastic process $X_t$ is \textbf{Markov} if conditioned on the present state, future is independent of the past.  
 That is, for any ordered index set $T$ containing any two indices $u > t$, we have  %such that $t < u$, % \in T$, 
 \begin{align*}
-P(\{X_u(\omega) \leq x_u| X_s, s \leq t\}) = P(\{X_{u}(\omega) \leq x_u| X_t\}).
+P(\{X_u \leq x_u\}| \sF_t\}) = P(\{X_{u} \leq x_u\}| \sigma(X_t)).
 \end{align*}
 We will study this process in detail in coming lectures. 
 
@@ -135,8 +180,10 @@ A stochastic process $X_t$ indexed by positive reals is \textbf{L\'evy} if the f
 \item Continuous in probability: For any $\epsilon > 0$ and $t\geq 0$ it holds that $\lim _{h\rightarrow 0}P(|X_{t+h}-X_{t}|>\epsilon )=0$. 
 \end{enumerate}
 \begin{shaded*}
+\begin{exmp}
 Two examples of L\'evy processes are Poisson process and Wiener process. 
 The distribution of Poisson process at time $t$ is Poisson with rate $\lambda t$ and the distribution of Wiener process at time $t$ is zero mean Gaussian with variance $t$. 
+\end{exmp}
 \end{shaded*}
 \begin{thm} A L\'evy process has infinite divisibility. 
 That is, for all $n \in \N$ %the following equality holds 
