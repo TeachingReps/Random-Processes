@@ -1,0 +1,224 @@
+% !TEX spellcheck = en_US
+% !TEX spellcheck = LaTeX
+\documentclass[letterpaper,10pt,english]{article}
+\input{header}
+\title{Lecture-20: Random Processes}
+\author{}
+
+\begin{document}
+\maketitle
+
+\section{Stochastic Processes} 
+
+%\begin{defn} 
+Let $(\Omega, \sF, P)$ be a probability space. 
+For an arbitrary index set $T$ and state space $\sX \subseteq \R$, a \textbf{random process} is a measurable map $X : (\Omega, T) \to \sX$. 
+For each $t \in T$, we have $X_t \triangleq \{X(t, \omega): \omega \in \Omega\}$ is a random variable defined on the probability space $(\Omega, \sF, P)$, 
+and random process $X$ is a collection of random variables $X = (X_t \in \sX: t \in T)$. 
+For each $\omega \in \Omega$, we have a sample path $X_{\omega} \triangleq (X_t(\omega): t \in T)$ of the process $X$. 
+
+%each defined on the same probability space $(\Omega, \sF, P)$ is called a \textbf{random process} 
+%\end{defn}
+
+\subsection{Classification}
+State space $\sX$ can be countable or uncountable, corresponding to discrete or continuous valued process.  
+If the index set $T$ is countable, the stochastic process is called \textbf{discrete}-time stochastic process or random sequence. 
+When the index set $T$ is uncountable, it is called \textbf{continuous}-time stochastic process. 
+The index set $T$ doesn't have to be time, if the index set is space, and then the stochastic process is spatial process. 
+When $T = \R^n \times [0, \infty)$, stochastic process $X(t)$ is a spatio-temporal process. 
+\begin{shaded*}
+\begin{exmp}
+We list some examples of each such stochastic process. 
+\begin{enumerate}[i\_]
+\item Discrete random sequence: brand switching, discrete time queues, number of people at bank each day.
+\item Continuous random sequence: stock prices, currency exchange rates, waiting time in queue of $n$th arrival, workload at arrivals in time sharing computer systems.
+\item Discrete random process:  counting processes, population sampled at birth-death instants, number of people in queues.
+\item Continuous random process: water level in a dam, waiting time till service in a queue, location of a mobile node in a network.
+\end{enumerate}
+\end{exmp}
+\end{shaded*}
+
+\subsection{Specification}
+To define a measure on a random process, we can either put a measure on sample paths, or equip the collection of random variables with a joint measure. 
+%We adopt the second approach, and 
+We are interested in identifying the joint distribution $F: \R^T \to [0,1]$. 
+To this end, for any $x \in \R^T$we need to know
+\begin{align*}
+F(x) = P\left(\displaystyle {\bigcap_{t \in T}\{\omega \in \Omega: X_t(\omega) \leq x_t\}}\right) = P(\bigcap_{t \in T}X_t^{-1}(-\infty, x_t]) = P \circ X^{-1}\bigtimes_{t \in T}(-\infty, x_t].
+\end{align*}
+However, even for a simple independent process with countably infinite $T$, 
+%When the index set $T$ is infinite, 
+any function of the above form would be zero if $x_t$ is finite for all $t \in T$. 
+Therefore, we only look at the values of $F(x)$ when $x_t \in \R$ for indices $t$ in a finite set $S$ and $x_t = \infty$  for all $t \notin S$. 
+That is, for any finite set $S \subseteq T $we focus on the product sets of the form 
+\eq{
+\bigtimes_{s \in S}(-\infty, x_s]\bigtimes_{s \notin S}\R. 
+}
+%This leads to finite-dimensional distributions as defined below. 
+%\begin{defn}  
+We can define a \textbf{finite dimensional distribution} for any finite set $S \subseteq T$ and $x_S = \{x_s \in \R : s \in S\}$, 
+\begin{align*}
+F_S(x_S) = P\left(\displaystyle {\bigcap_{s \in S}\{\omega \in \Omega: X_s(\omega) \leq x_s\}}\right) = P(\bigcap_{s \in S}X_s^{-1}(-\infty, x_s]).
+\end{align*}
+%\end{defn}
+Set of all finite dimensional distributions of the stochastic process $\{X_t: t \in T\}$ characterizes its distribution completely.
+Simpler characterizations of a stochastic process $X(t)$ are in terms of its moments. 
+That is, the first moment such as mean, and the second moment such as correlations and covariance functions. 
+\begin{xalignat*}{5}
+&m_X(t) \triangleq \E X_t, && R_X(t,s) \triangleq \E X_tX_s,&& C_X(t,s) \triangleq \E (X_t - m_X(t))(X_s-m_X(s)).
+\end{xalignat*}
+
+\begin{shaded*}
+\begin{exmp}
+Some examples of simple stochastic processes. 
+\begin{enumerate}[i\_]
+\item $X_t = A \cos 2\pi t$, where $A$ is random. 
+%The finite dimensional distribution is given by 
+%\begin{align*}
+%F_S(x) = P\left(\left\{A\cos 2\pi s \leq x_s, s \in S\right\}\right). %P\left(\left\{A \leq \min_{s \in S\setminus\{(2k+1)\frac{\pi}{2}, k \in \Z\}}\frac{x_s}{\cos 2\pi_s}\right\}\right).
+%\end{align*}
+%The moments are given by 
+%\meq{3}{
+%&m_X(t) = (\E A)\cos 2\pi t, && R_X(t,s) =  (\E A^2) \cos 2\pi t\cos 2\pi s,&& C_X(t,s) =\text{Var}(A) \cos 2\pi t\cos 2\pi s.
+%}
+\item $X_t = \cos(2\pi t+ \Theta)$, where $\Theta$ is random and uniformly distributed between $(-\pi, \pi]$. 
+%The finite dimensional distribution is given by 
+%\begin{align*}
+%F_S(x) = P\left(\left\{\cos(2\pi s + \Theta) \leq x_s, s \in S\right\}\right). %P\left(\left\{A \leq \min_{s \in S\setminus\{(2k+1)\frac{\pi}{2}, k \in \Z\}}\frac{x_s}{\cos 2\pi_s}\right\}\right).
+%\end{align*}
+%The moments are given by 
+%\meq{3}{
+%&m_X = 0, && R_X(t,s) =  \frac{1}{2}\cos2\pi (t-s),&& C_X(t,s) = R_X(t,s).
+%}
+\item $X_n = U^n$ for $n \in \N$, where $U$ is uniformly distributed in the open interval $(0,1)$.
+\item $Z_t = At +B$ where $A$ and $B$ are independent random variables. 
+\end{enumerate}
+\end{exmp}
+\end{shaded*}
+
+\subsection{Independence}
+Recall, given the probability space $(\Omega, \sF, P)$, two events $A, B \in \sF$ are \textbf{independent events} if 
+\begin{align*}
+P(A\cap B) = P(A)P(B).
+\end{align*}
+Random variables $X,Y$ defined on the above probability space, are \textbf{independent random variables} if for all $x,y \in \R$
+\begin{align*}
+P\{X(\omega) \leq x, Y(\omega) \leq y\} = P\{X(\omega) \leq x\}P\{Y(\omega) \leq y\}.
+\end{align*}
+A stochastic process $X$ is said to be \textbf{independent} if for all finite subsets $S \subseteq T$, we have
+\eq{
+P(\{X_s \leq  x_s, s \in S\}) = \prod_{s \in S}P\{X_s \leq x_s\}. 
+}
+Two stochastic process $X, Y$ for the common index set $T$ are \textbf{independent random processes} if for all %$m,n \in \N$ and 
+finite subsets $I, J \subseteq T$ %such that $|I| =m, |J| = n$, 
+\begin{align*}
+P\left(\{X_i \leq x_i, i \in I \}\cap\{Y_j \leq y_j, j \in J\}\right) = P\left(\{X_i \leq x_i, i \in I\}\right)P\left(\{Y_j \leq y_j, j \in J\}\right).
+\end{align*}
+
+\subsection{Conditional Expectation and Filtration} 
+Let $(\Omega, \sF, P)$ be the probability space.  
+Let $X$ be a measurable random variable on this probability space denoted as $X \in \sF$, 
+if the event $X^{-1}(-\infty, x] = \{\omega \in \Omega: X(\omega) \leq x\} \in \sF$ for each $x \in \R$.  
+Let $\sE \subseteq \sF$ be a $\sigma$-algebra, then the \textbf{conditional expectation} of $X$ given $\sE$ is denoted $\E[X | \sE]$ and is a random variable $Y = \E[X | \sE]$ where
+\begin{enumerate}[i\_] 
+\item $Y \in \sE$,
+\item for each event $A \in \sE$, we have $\E [X1_A] = \E[Y1_A]$. 
+%\eq{
+%\int_A X dP = \int_A Y dP. 
+%}
+\end{enumerate}
+Intuitively, we think of the $\sigma$-algebra $\sE$ as describing the information we have. 
+For each $A \in \sE$, we know whether or not $A$ has occurred. 
+The conditional expectation $\E[X|\sE]$ is then the ``best guess'' of the value of $X$ given the information $\sE$. 
+Let $X,Y$ be two random variables defined on this probability space. 
+Then, the conditional expectation of $X$ given $Y$ is defined as 
+\eq{
+\E[X|Y] = \E[X | \sigma(Y)]. 
+}
+A random variable $X$ is \textbf{independent} of the $\sigma$-algebra $\sE$, if for all $x \in \R$ and $A \in \sE$, 
+\eq{
+\E[1_{\{X \leq x\}}1_A]= P\{X \leq x\}\cap A = P\{X \leq x\}P(A) = \E1_{\{X \leq x\}}\E1_A. 
+}
+\begin{lem}
+Let $(\Omega, \sF, P)$ be a probability space with $\sE \subseteq \sF$ a $\sigma$-algebra. 
+If $X \in \sE$ is a random variable, then $\E[X| \sE] = X$. 
+\end{lem}
+\begin{proof} 
+First condition is true by hypothesis, and the second condition holds for any $A \in \sE$. 
+\end{proof}
+\begin{lem} 
+Let $(\Omega, \sF, P)$ be a probability space with $\sE \subseteq \sF$ a $\sigma$-algebra. 
+If $X \in \sF$ be a random variable independent of $\sE$.  
+Then, $\E[X| \sE]  = \E[X]$. 
+\end{lem}
+\begin{proof}
+This follows since $\E X \in \sE$ and the random variables $X$ and $1_{A}$ are independent for any $A \in \sE$, 
+which implies 
+\eq{
+\E[X1_A] = \E X \E 1_A = \E [(\E X) 1_A]. 
+}
+\end{proof}
+One can partition the state space $\R$ into measurable sets $E_1, E_2, \dots$ for the random variable $X$ defined on the given probability space. 
+Then $\Omega_i \triangleq X^{-1}(E_i)$ is a partition of the sample space $\Omega$. 
+Let $Y$ be a random variable defined as the partition index for the random variable $X$. 
+That is, 
+\eq{
+Y = \sum_{i \in \N}i \cdot 1_{\{X \in E_i\}}. 
+} 
+Let $\sE \triangleq \sigma(\Omega_1, \Omega_2, \dots)$, then one can check that $Y \in \sE$ or $\sigma(Y) = \sE$. 
+Hence, $\E[X|Y] = \E[X|\sigma(Y)] = \E[X|\sE]$. 
+Clearly, $\E[X|Y]$ would be a function of $Y$ and since $Y$ takes countably many values, we have $Z = \E[X|Y]$ taking countably many values, with $Z_i = Z1_{\{Y = i\}}$ being a constant on the corresponding partition $\Omega_i$  of the sample space. 
+One can compute this conditional expectation using joint distribution directly as 
+\eq{
+\E[X|Y=i] = \int_{\R}xdF_{X|Y=i}(x) = \frac{1}{P(\Omega_i)}\int_{E_i}xdF(x) = \frac{\E X1_{\Omega_i}}{P(\Omega_i)}
+}
+\begin{lem}
+Suppose $\{\Omega_i: i \in \N\}$ be a countable partition of the sample space $\Omega$, and $\sE = \sigma(\Omega_1, \Omega_2, \dots)$ is the $\sigma$-field generated by this partition. 
+Then, 
+\eq{
+\E[X | \sE] = \frac{\E[X1_{\Omega_i}]}{P(\Omega_i)} \text{ on } \Omega_i.
+}
+\end{lem}
+\begin{proof}
+It is easy to see that the RHS is constant on each partition $\Omega_i$ and hence is measurable with respect to $\sE$. 
+Further, for each $\Omega_i \in \sE$, we have
+\eq{
+\int_{\Omega_i}\frac{\E[X 1_{\Omega_i}]}{P(\Omega_i)}dP = \E[X 1_{\Omega_i}] = \int_{\Omega_i}XdP. 
+}
+\end{proof}
+\begin{cor} $P(A|B)P(B) = P(A\cap B)$.
+\end{cor}
+\begin{proof}
+Taking $X = 1_A$ and $\sE = \{\emptyset, \Omega, B, B^c\}$, from the previous Lemma we get 
+\eq{
+P(A|B) = \E[1_A| 1_B]= \E[1_A|\sE] = \frac{\E[1_A1_B]}{P(B)} = \frac{P(A\cap B)}{P(B)}.
+} 
+\end{proof}
+
+\begin{thm}[Bayes' Formula] 
+For a $\sigma$-algebra $\sE \subseteq \sF$, and for any events $G \in \sE$ and $A \in \sF$, we have 
+\eq{
+P(G|A) = \frac{\E[1_GP(A| \sE)]}{\E P(A|\sE)}.
+}
+\end{thm}
+\begin{proof}
+It is easy to check that numerator is $\E 1_G\E[1_A|\sE] = \E[1_{A \cap G}|\sE]$. 
+It suffices to show that $\E\E[1_A|\sE] = \E 1_A$, which follows from definition. 
+\end{proof}
+\begin{cor} 
+For the countable partition $(\Omega_1, \Omega_2, \dots)$, if the $\sigma$-algebra $\sE = \sigma(\Omega_1, \Omega_2, \dots)$, then for any events $G \in \sE$ and $A \in \sF$, we have 
+\eq{
+P(\Omega_i|A) = \frac{P(A|\Omega_i)P(\Omega_i)}{\sum_{j \in \N}P(A|\Omega_j)P(\Omega_j)}.
+}
+\end{cor}
+\begin{proof}
+Result follows from the fact that $P(A|\sE) \in \sE$ and hence is a constant on each partition $\Omega_j$. % and $\sum_{j \in \N}1_{\Omega_j} = 1$.
+\end{proof}
+
+\subsubsection{Filtration}
+A net of $\sigma$-algebras $\{\sF_i \subseteq \sF: i \in I\}$ is called a \textbf{filtration} when the index set $I$ is totally ordered and the net is increasing, that is for all $i \leqslant j \in I$ implies $\sF_i \subseteq \sF_j$. 
+For a random process $X$ with an ordered index set $T$, we can define a filtration indexed by $T$, such that $\sF_t$ is the information about the process till index $t$, and 
+\eq{
+\sF_t \triangleq \sigma(X_s, s \leqslant t).
+}
+\end{document}
