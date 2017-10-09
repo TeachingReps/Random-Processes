@@ -2,173 +2,21 @@
 % !TEX spellcheck = LaTeX
 \documentclass[letterpaper,10pt,english]{article}
 \input{header}
-\title{Lecture-20: Random Processes}
+\title{Lecture-18: Example Random Processes}
 \author{}
 
 \begin{document}
 \maketitle
 
-\section{Stochastic Processes} 
 
-%\begin{defn} 
-Let $(\Omega, \sF, P)$ be a probability space. 
-For an arbitrary index set $T$ and state space $\sX \subseteq \R$, a \textbf{random process} is a measurable map $X : (\Omega, T) \to \sX$. 
-For each $t \in T$, we have $X_t \triangleq \{X(t, \omega): \omega \in \Omega\}$ is a random variable defined on the probability space $(\Omega, \sF, P)$, 
-and random process $X$ is a collection of random variables $X = (X_t \in \sX: t \in T)$. 
-For each $\omega \in \Omega$, we have a sample path $X_{\omega} \triangleq (X_t(\omega): t \in T)$ of the process $X$. 
-
-%each defined on the same probability space $(\Omega, \sF, P)$ is called a \textbf{random process} 
-%\end{defn}
-
-\subsection{Classification}
-State space $\sX$ can be countable or uncountable, corresponding to discrete or continuous valued process.  
-If the index set $T$ is countable, the stochastic process is called \textbf{discrete}-time stochastic process or random sequence. 
-When the index set $T$ is uncountable, it is called \textbf{continuous}-time stochastic process. 
-The index set $T$ doesn't have to be time, if the index set is space, and then the stochastic process is spatial process. 
-When $T = \R^n \times [0, \infty)$, stochastic process $X(t)$ is a spatio-temporal process. 
-\begin{shaded*}
-\begin{exmp}
-We list some examples of each such stochastic process. 
-\begin{enumerate}[i\_]
-\item Discrete random sequence: brand switching, discrete time queues, number of people at bank each day.
-\item Continuous random sequence: stock prices, currency exchange rates, waiting time in queue of $n$th arrival, workload at arrivals in time sharing computer systems.
-\item Discrete random process:  counting processes, population sampled at birth-death instants, number of people in queues.
-\item Continuous random process: water level in a dam, waiting time till service in a queue, location of a mobile node in a network.
-\end{enumerate}
-\end{exmp}
-\end{shaded*}
-
-\subsection{Specification}
-To define a measure on a random process, we can either put a measure on sample paths, or equip the collection of random variables with a joint measure. 
-We adopt the second approach, and try to identify the joint distribution $F: \R^T \to [0,1]$. 
-To this end, for any $x \in \R^T$we need to know
-\begin{align*}
-F(x) = P\left(\displaystyle {\bigcap_{t \in T}\{\omega \in \Omega: X_t(\omega) \leq x_t\}}\right).
-\end{align*}
-When the index set $T$ is infinite, any function of the above form would be zero if $x_t$ is finite for all $t \in T$. 
-Therefore, we only look at the values of $F(x)$ when $x_t \in \R$ for indices $t$ in a finite set $S$ and $x_t = \infty$  for all $t \notin S$. 
-%This leads to finite-dimensional distributions as defined below. 
-%\begin{defn}  
-We can define a \textbf{finite dimensional distribution} for any finite set $S \subseteq T$ and $x_S = \{x_s \in \R : s \in S\}$, 
-\begin{align*}
-F_S(x) = P\left(\displaystyle {\bigcap_{s \in S}\{\omega \in \Omega: X_s(\omega) \leq x_s\}}\right).
-\end{align*}
-%\end{defn}
-Set of all finite dimensional distributions of the stochastic process $\{X_t: t \in T\}$ characterizes its distribution completely.
-Simpler characterizations of a stochastic process $X(t)$ are in terms of its moments. 
-That is, the first moment such as mean, and the second moment such as correlations and covariance functions. 
-\begin{xalignat*}{5}
-&m_X(t) \triangleq \E X_t, && R_X(t,s) \triangleq \E X_tX_s,&& C_X(t,s) \triangleq \E (X_t - m_X(t))(X_s-m_X(s)).
-\end{xalignat*}
-
-\begin{shaded*}
-\begin{exmp}
-Some examples of simple stochastic processes. 
-\begin{enumerate}[i\_]
-\item $X_t = A \cos 2\pi t$, where $A$ is random. 
-The finite dimensional distribution is given by 
-\begin{align*}
-F_S(x) &= P\left(\left\{A\cos 2\pi s \leq x_s, s \in S\right\}\right). %P\left(\left\{A \leq \min_{s \in S\setminus\{(2k+1)\frac{\pi}{2}, k \in \Z\}}\frac{x_s}{\cos 2\pi_s}\right\}\right).
-\end{align*}
-The moments are given by 
-\begin{xalignat*}{5}
-&m_X(t) = (\E A)\cos 2\pi t, && R_X(t,s) =  (\E A^2) \cos 2\pi t\cos 2\pi s,&& C_X(t,s) =\text{Var}(A) \cos 2\pi t\cos 2\pi s.
-\end{xalignat*}
-\item $X_t = \cos(2\pi t+ \Theta)$, where $\Theta$ is random and uniformly distributed between $(-\pi, \pi]$. 
-The finite dimensional distribution is given by 
-\begin{align*}
-F_S(x) &= P\left(\left\{\cos(2\pi s + \Theta) \leq x_s, s \in S\right\}\right). %P\left(\left\{A \leq \min_{s \in S\setminus\{(2k+1)\frac{\pi}{2}, k \in \Z\}}\frac{x_s}{\cos 2\pi_s}\right\}\right).
-\end{align*}
-The moments are given by 
-\begin{xalignat*}{5}
-&m_X = 0, && R_X(t,s) =  \frac{1}{2}\cos2\pi (t-s),&& C_X(t,s) = R_X(t,s).
-\end{xalignat*}
-\item $X_n = U^n$ for $n \in \N$, where $U$ is uniformly distributed in the open interval $(0,1)$.
-\item $Z_t = At +B$ where $A$ and $B$ are independent random variables. 
-\end{enumerate}
-\end{exmp}
-\end{shaded*}
-
-\subsection{Independence}
-Recall, given the probability space $(\Omega, \sF, P)$, two events $A, B \in \sF$ are \textbf{independent events} if 
-\begin{align*}
-P(A\cap B) = P(A)P(B).
-\end{align*}
-Random variables $X,Y$ defined on the above probability space, are \textbf{independent random variables} if for all $x,y \in \R$
-\begin{align*}
-P\{X(\omega) \leq x, Y(\omega) \leq y\} = P\{X(\omega) \leq x\}P\{Y(\omega) \leq y\}.
-\end{align*}
-A stochastic process $X$ is said to be \textbf{independent} if for all finite subsets $S \subseteq T$, we have
-\eq{
-P(\{X_s \leq  x_s, s \in S\}) = \prod_{s \in S}P\{X_s \leq x_s\}. 
-}
-Two stochastic process $X, Y$ for the common index set $T$ are \textbf{independent random processes} if for all %$m,n \in \N$ and 
-finite subsets $I, J \subseteq T$ %such that $|I| =m, |J| = n$, 
-\begin{align*}
-P\left(\{X_i \leq x_i, i \in I \}\cap\{Y_j \leq y_j, j \in J\}\right) = P\left(\{X_i \leq x_i, i \in I\}\right)P\left(\{Y_j \leq y_j, j \in J\}\right).
-\end{align*}
-
-\subsection{Conditional Expectation and Filtration} 
-Let $(\Omega, \sF, P)$ be the probability space.  
-Let $X$ be a measurable random variable on this probability space denoted as $X \in \sF$, 
-if the event $X^{-1}(-\infty, x] = \{\omega \in \Omega: X(\omega) \leq x\} \in \sF$ for each $x \in \R$.  
-Let $\sE \subseteq \sF$ be a $\sigma$-algebra, then the \textbf{conditional expectation} of $X$ given $\sE$ is denoted $\E[X | \sE]$ and is a random variable $Y = \E[X | \sE]$ such that $Y \in \sE$ and for each event $A \in \sE$
-\eq{
-\int_A X dP &= \int_A Y dP. 
-}
-Intuitively, we think of the $\sigma$-algebra $\sE$ as describing the information we have. 
-For each $A \in \sE$, we know whether or not $A$ has occurred. 
-The conditional expectation $\E[X|\sE]$ is then the ``best guess'' of the value of $X$ given the information $\sE$. 
-In particular, if $X \in \sE$ then $\E[X| \sE] = X$. 
-A random variable $X$ is independent of the $\sigma$-algebra $\sE$, if for all $x \in \R$ and $A \in \sE$, 
-\eq{
-P\{X \leq x\}\cap A = P\{X \leq x\}P(A). 
-}
-\begin{lem} 
-For the probability space $(\Omega, \sF, P)$ and $\sE \subseteq \sF$ a $\sigma$-algebra, 
-let $X \in \sF$ be a random variable independent of $\sE$.  
-Then, $\E[X| \sE]  = \E[X]$. 
-\end{lem}
-\begin{proof}
-This follows since $\E X \in \sE$ and the random variables $X$ and $1_{A}$ are independent for any $A \in \sE$, 
-which implies 
-\eq{
-\int_{A}X dP = \E[X1_A] = \E X P(A) = \int_{A}\E X dP. 
-}
-\end{proof}
-\begin{lem}
-Suppose $\{\Omega_i: i \in \N\}$ be a countable partition of the sample space $\Omega$, and $\sE = \sigma(\Omega_1, \Omega_2, \dots)$ is the $\sigma$-field generated by this partition. 
-Then, 
-\eq{
-\E[X | \sE] &= \frac{\E[X1_{\Omega_i}]}{P(\Omega_i)} \text{ on } \Omega_i.
-}
-\end{lem}
-\begin{proof}
-It is easy to see that the RHS is constant on each partition $\Omega_i$ and hence is measurable with respect to $\sE$. 
-Further, for $\Omega_i \in \sE$, we have
-\eq{
-\int_{\Omega_i}\frac{\E[X 1_{\Omega_i}]}{P(\Omega_i)}dP &= \E[X 1_{\Omega_i}] = \int_{\Omega_i}XdP. 
-}
-\end{proof}
-Conditional expectation of two random variables defined on this probability space is defined as 
-\eq{
-\E[X|Y] &= \E[X | \sigma(Y)]. 
-}
-
-A net of $\sigma$-algebras $\{\sF_i \subseteq \sF: i \in I\}$ is called a \textbf{filtration} when the index set $I$ is totally ordered and the net is increasing, that is for all $i \leqslant j \in I$ implies $\sF_i \subseteq \sF_j$. 
-For a random process $X$ with an ordered index set $T$, we can define a filtration indexed by $T$, such that $\sF_t$ is the information about the process till index $t$, and 
-\eq{
-\sF_t &\triangleq \sigma(X_s, s \leqslant t).
-}
-
-\subsection{Examples of Tractable Stochastic Processes}
+\section{Examples of Tractable Stochastic Processes}
 In general, it is very difficult to characterize a stochastic process completely in terms of its finite dimensional distribution. 
 However, we have listed few analytically tractable examples below, where we can completely characterize the stochastic process. 
-\subsubsection{Independent and identically distributed processes}
-Let $\{X_t: t \in T\}$ be an independent and identically distributed (\emph{iid}) random process, with common distribution $F(x)$. 
+\subsection{Independent and identically distributed processes}
+Let $\{X_t: t \in T\}$ be an independent and identically distributed (\emph{iid}) random process, with a common distribution $F(x)$. 
 Then, the finite dimensional distribution for this process for any finite $S \subseteq T$ can be written as 
 \begin{align*}
-F_S(x) &= P\left(\{X_s(\omega) \leq x_s, s \in S\}\right) = \prod_{s \in S}F(x_s).
+F_S(x) = P\left(\{X_s(\omega) \leq x_s, s \in S\}\right) = \prod_{s \in S}F(x_s).
 \end{align*}
 It's easy to verify that the first and the second moments are independent of time indices. 
 Since $X_t = X_0$ in distribution, 
@@ -177,10 +25,10 @@ Since $X_t = X_0$ in distribution,
 \end{xalignat*}
 
 %\subsubsection{Independent increments process}
-\subsubsection{Stationary Processes}
+\subsection{Stationary Processes}
 A stochastic process $X_t$ is \textbf{stationary} if all finite dimensional distributions are shift invariant, that is for finite $S \subseteq T$ and $t > 0$, we have 
 \begin{align*}
-F_S(x) &= P(\{X_s(\omega) \leq x_s, s \in S\}) = P(\{X_{s+t}(\omega) \leq x_s, s \in S\}) = F_{t+S}(x).
+F_S(x_S) = P(\{X_s(\omega) \leq x_s, s \in S\}) = P(\{X_{s+t}(\omega) \leq x_s, s \in S\}) = F_{t+S}(x_S).
 \end{align*}
 In particular, all the moments are shift invariant. 
 Since $X_t = X_0$ and $(X_t,X_s) = (X_{t-s}, X_{0})$ in distribution, we have 
@@ -188,21 +36,21 @@ Since $X_t = X_0$ and $(X_t,X_s) = (X_{t-s}, X_{0})$ in distribution, we have
 &m_X = \E X_0 , && R_X(t-s,0) = \E X_{t-s}X_0, && C_X(t-s,0) = R_X(t-s,0) - m_X^2.
 \end{xalignat*}
 
-\subsubsection{Markov Processes}
+\subsection{Markov Processes}
 A stochastic process $X_t$ is \textbf{Markov} if conditioned on the present state, future is independent of the past.  
 That is, for any ordered index set $T$ containing any two indices $u > t$, we have  %such that $t < u$, % \in T$, 
 \begin{align*}
-P(\{X_u \leq x_u\}| \sF_t\}) = P(\{X_{u} \leq x_u\}| \sigma(X_t)).
+P(\{X_u \leq x_u\}| \sF_t) = P(\{X_{u} \leq x_u\}| \sigma(X_t)).
 \end{align*}
 We will study this process in detail in coming lectures. 
 
-\subsubsection{L\'evy Processes}
-A stochastic process $X_t$ indexed by positive reals is \textbf{L\'evy} if the following conditions hold. 
-\begin{enumerate}[i\_]
-\item $X_{0}=0$, almost surely.
-\item The increments are independent: For any $ 0\leq t_{1}<t_{2}<\cdots <t_{n}<\infty$, $X_{t_{2}}-X_{t_{1}},X_{t_{3}}-X_{t_{2}},\ldots ,X_{t_{n}}-X_{t_{n-1}}$ are independent.
-\item The increments are stationary: For any $s<t$,  $X_{t}-X_{s}$, is equal in distribution to $X_{t-s}$.
-\item Continuous in probability: For any $\epsilon > 0$ and $t\geq 0$ it holds that $\lim _{h\rightarrow 0}P(|X_{t+h}-X_{t}|>\epsilon )=0$. 
+\subsection{L\'evy Processes}
+A right continuous with left limits stochastic process $X = (X_t \in \R: t \in T \subseteq \R_+)$ with $X_0 = 0$ almost surely, is a \textbf{L\'evy process} if the following conditions hold. 
+\begin{enumerate}[(L1)]
+%\item $X_{0}=0$ almost surely.
+\item The increments are independent. For any $ 0\leq t_{1}<t_{2}<\cdots <t_{n}<\infty$, $X_{t_{2}}-X_{t_{1}},X_{t_{3}}-X_{t_{2}},\ldots ,X_{t_{n}}-X_{t_{n-1}}$ are independent.
+\item The increments are stationary. For any $s<t$,  $X_{t}-X_{s}$, is equal in distribution to $X_{t-s}$.
+\item Continuous in probability. For any $\epsilon > 0$ and $t\geq 0$ it holds that $\lim _{h\rightarrow 0}P(|X_{t+h}-X_{t}|>\epsilon )=0$. 
 \end{enumerate}
 \begin{shaded*}
 \begin{exmp}
@@ -213,23 +61,23 @@ The distribution of Poisson process at time $t$ is Poisson with rate $\lambda t$
 \begin{thm} A L\'evy process has infinite divisibility. 
 That is, for all $n \in \N$ %the following equality holds 
 \begin{align*}
-\E e^{\theta X_t} &= \left(\E e^{\theta X_{{t}/{n}}}\right)^n.
+\E e^{\theta X_t} = \left(\E e^{\theta X_{{t}/{n}}}\right)^n.
 \end{align*}
 Further, if the process has finite moments $\mu_n(t) = \E X_t^n$ then the following Binomial identity holds
 \begin{align*}
-\mu_n(t+s) &= \sum_{k=0}^n\binom{n}{k}\mu_k(t)\mu_{n-k}(s).
+\mu_n(t+s) = \sum_{k=0}^n\binom{n}{k}\mu_k(t)\mu_{n-k}(s).
 \end{align*}
 \end{thm}
 \begin{proof}
 The first equality follows from the independent and stationary increment property of the process, 
 and the fact that we can write 
 \begin{align*}
-X_t &= \sum_{k=1}^nX_{\frac{kt}{n}}-X_{\frac{(k-1)t}{n}}.
+X_t = \sum_{k=1}^nX_{\frac{kt}{n}}-X_{\frac{(k-1)t}{n}}.
 \end{align*}
 Second property also follows from the the independent and stationary increment property of the process, 
 and the fact that we can write 
 \begin{align*}
-X_{t+s}^n &= (X_{t} + X_{t+s}-X_{t})^n = \sum_{k=0}^n\binom{n}{k}X_t^k(X_{t+s}-X_t)^{n-k}.
+X_{t+s}^n = (X_{t} + X_{t+s}-X_{t})^n = \sum_{k=0}^n\binom{n}{k}X_t^k(X_{t+s}-X_t)^{n-k}.
 \end{align*}
 
 \end{proof}
@@ -239,6 +87,7 @@ X_{t+s}^n &= (X_{t} + X_{t+s}-X_{t})^n = \sum_{k=0}^n\binom{n}{k}X_t^k(X_{t+s}-X
 %&m_X = \E X_0 , && R_X(t-s,0) = \E X_{t-s}X_0, && C_X(t-s,0) = R_X(t-s,0) - m_X^2.
 %\end{xalignat*}
 \end{document}
+
 \section{Examples of Stochastic Processes}
 \begin{exmp}[Queues] Queues are complex stochastic processes and consist of two stochastic processes arrival and service, coupled through a buffer. 
 Number of arrivals and arrival instants could be discrete or continuous random variable. 
@@ -297,9 +146,9 @@ A simple point process $\{N(t),~ t\geqslant0\} $ is called a \textbf{Poisson pro
 
 \textbf{Remarks:} Observe that 
 \begin{align*}
-\{S_{n}\leqslant t\} &=  \{N(t)\geqslant n \},\\
-\{S_{n}\leqslant t, S_{n+1}> t \} &= \{N(t)= n\},\quad\mathrm{and} \\
-P\{X_{n} = 0\} &= P\{X_n\leqslant 0\} = 0.
+\{S_{n}\leqslant t\} =  \{N(t)\geqslant n \},\\
+\{S_{n}\leqslant t, S_{n+1}> t \} = \{N(t)= n\},\quad\mathrm{and} \\
+P\{X_{n} = 0\} = P\{X_n\leqslant 0\} = 0.
 \end{align*}
 Also, by Strong Law of Large Numbers (SLLN), 
 \begin{equation*}
@@ -322,13 +171,13 @@ Since each $X_k$ is \emph{iid} exponential with rate $\lambda$, it is easy to se
 		\end{cases} 
  \end{equation*} 
    %\begin{eqnarray*}
-%\mathbb{ E}[e^{\alpha X_{1}}]  &=& \int^{\infty}_{0}\lambda e^{-\lambda t} e^{\alpha t} dt \\
-  %&=& \lambda \int^{\infty}_{0} e ^{-(\lambda-\alpha)t} dt\\
+%\mathbb{ E}[e^{\alpha X_{1}}]  =& \int^{\infty}_{0}\lambda e^{-\lambda t} e^{\alpha t} dt \\
+  %=& \lambda \int^{\infty}_{0} e ^{-(\lambda-\alpha)t} dt\\
   %\end{eqnarray*}
    %If $\alpha \geqslant \lambda,~\mathbb{E} [e^{\alpha X_{1}}] = \infty$. Else, 
   %\begin{eqnarray*}
-  %\mathbb{E} [e^{\alpha X_{1}}]&=&\lambda \left[ \frac{e^{-(\lambda-\alpha)t}}{-(\lambda-\alpha)}\right]^{\infty}_{0} \\
-   %&=& \lambda\left[0-(-\frac{1}{\lambda-\alpha})\right] = \frac{\lambda}{\lambda-\alpha}. 
+  %\mathbb{E} [e^{\alpha X_{1}}]=&\lambda \left[ \frac{e^{-(\lambda-\alpha)t}}{-(\lambda-\alpha)}\right]^{\infty}_{0} \\
+   %=& \lambda\left[0-(-\frac{1}{\lambda-\alpha})\right] = \frac{\lambda}{\lambda-\alpha}. 
    %\end{eqnarray*}
 Substituting the moment generating function of inter-arrival time $X_1$ in moment generating function of $n^{\mathrm{th}}$ event time $S_n$, we obtain
 \begin{equation*}
@@ -361,11 +210,11 @@ Process $N(t)$ is of real interest, and we can compute the distribution of $N(t)
 \begin{proof}
 
 \begin{eqnarray*}
-   P\{N(t) =n\}&=&  P\{S_{n}\leqslant t, S_{n+1} >t)\\
-   &=&  \int^{t}_{0} P\left\{ {S_{n+1}>t}|{S_{n}=s}\right\}f_{S_n}(s)  ds\\
+   P\{N(t) =n\}=&  P\{S_{n}\leqslant t, S_{n+1} >t)\\
+   =&  \int^{t}_{0} P\left\{ {S_{n+1}>t}|{S_{n}=s}\right\}f_{S_n}(s)  ds\\
    &\stackrel{(a)}{=}& \int^{t}_{0} P\{X_{n+1}>t-s\} f_{S_n}(s) ds\\
-   &=&  \int^{t}_{0}e^{-\lambda(t- s)} \frac{\lambda^{n}s^{n-1}}{(n-1)!}e^{-\lambda s}  ds\\
-   &=&\frac{e^{-\lambda t} (\lambda t)^{n}}{n !}.
+   =&  \int^{t}_{0}e^{-\lambda(t- s)} \frac{\lambda^{n}s^{n-1}}{(n-1)!}e^{-\lambda s}  ds\\
+   =&\frac{e^{-\lambda t} (\lambda t)^{n}}{n !}.
 \end{eqnarray*}
  where (a) follows from the memoryless property of exponential distribution. %($P\{X_{n+1}>s+t|X_{k+1}>t)=P\{X_{k+1}>s)$).\\
 \end{proof}
@@ -387,14 +236,14 @@ Process $N(t)$ is of real interest, and we can compute the distribution of $N(t)
 %
 %If $N(t)$ is independent increment process.
 %\begin{eqnarray*}
-%&=&P [N(t1}=n_{1}]\\
-%P (N(t2}-N(t1} &=& n_{2}-n_{1}) n2-n1\\
-% P (N(t2}-N(t1} &=&\frac{[\lambda (t2-t1)]}{(n2-n1)!} e^{-\lambda (t2-t1)!}\\
+%=&P [N(t1}=n_{1}]\\
+%P (N(t2}-N(t1} =& n_{2}-n_{1}) n2-n1\\
+% P (N(t2}-N(t1} =&\frac{[\lambda (t2-t1)]}{(n2-n1)!} e^{-\lambda (t2-t1)!}\\
 %\end{eqnarray*}
 %Need\\
 %\begin{eqnarray*}
-% N(t1}&=& n1\overrightarrow(n2-n1) n2\\
-% arrivals &=& \phi \frac{(\lambda t1)^{n1}}{(n1)!}e^{-\lambda t1}\\
+% N(t1}=& n1\overrightarrow(n2-n1) n2\\
+% arrivals =& \phi \frac{(\lambda t1)^{n1}}{(n1)!}e^{-\lambda t1}\\
 %\end{eqnarray*}
 %What it means all fdd can be computed from $1-d$ marginal in a stationary indep. incr. property.\\
 %Its not stationary $ \rightarrow N(t1}$ and $N(t2}$ not same distr.\\
@@ -406,7 +255,7 @@ Process $N(t)$ is of real interest, and we can compute the distribution of $N(t)
 %$S>0, t> 0$\\
 %\begin{eqnarray*}
 %% \nonumber to remove numbering (before each equation)
-%  P\{X>S +t / X>t) &=& P\{X>S) \\
+%  P\{X>S +t / X>t) =& P\{X>S) \\
 %  In \hspace{0.2cm}reliability\hspace{0.2cm} theory & x& life time\\
 %  P\{X>t+S/ X>t) &\leqslant& P\{X>S)
 %\end{eqnarray*}
@@ -414,23 +263,23 @@ Process $N(t)$ is of real interest, and we can compute the distribution of $N(t)
 %\begin{eqnarray*}
 %X>t+s>S\\
 %P\{X>s+t)/ X>t)\\
-%&=& \frac{P\{X>S+t, X>t)}{P\{X>t)}\\
-%&=& \frac{P\{X>S+t)}{P\{X>t)}\\
-%&=& e^{-\lambda S}\\
-%&=& P\{X>S)
+%=& \frac{P\{X>S+t, X>t)}{P\{X>t)}\\
+%=& \frac{P\{X>S+t)}{P\{X>t)}\\
+%=& e^{-\lambda S}\\
+%=& P\{X>S)
 %\end{eqnarray*}
 \begin{proof}
 Let $X$ be a random variable with a distribution function $F$ with memoryless property defined on $\mathbb{R}^{+}$. Let $g(t) \triangleq P\{X > t\} = 1 - F(t)$. Due to memoryless property of $F$, we notice that
 \begin{eqnarray*}
-  P\{X>s\} &=& P\{ X > t+s| X>t\} \\
-  P\{X>s\} &=& \frac{ P\{ X>t+s, X>t\}}{P\{X>t\}}.
+  P\{X>s\} =& P\{ X > t+s| X>t\} \\
+  P\{X>s\} =& \frac{ P\{ X>t+s, X>t\}}{P\{X>t\}}.
 \end{eqnarray*}
 Since $\{X > t + s\} =\{ X>t+s, X>t\}$, we have $g(t+s) = g(t)g(s)$ and hence $g(0) = g^2(0)$. Therefore, $g(0)$ is either unity or zero. Note, that $g$ is a right continuous (RC) function and is non-negative. 
 
 We will show that $g$ is an exponential function. That is, $g(t) = e^{\alpha t}$ for some $\alpha \geqslant 0$. We will prove this in stages. First, we show this is true for $t \in \mathbb{Z}^+$. Notice that we can obtain via induction
 \begin{eqnarray*}
-	g(2) &=& g(1) g(1) = g^{2}(1), \mathrm{ and }\\
-	g(m) &=& [g(1)]^{m}.
+	g(2) =& g(1) g(1) = g^{2}(1), \mathrm{ and }\\
+	g(m) =& [g(1)]^{m}.
 \end{eqnarray*}
 Since $g(1)$ is non negative, there exists a $\beta$ such that $g(1)=e^{\beta}$ and $g(m)= e^{m \beta}, m \in \mathbb{Z}_{+}$. Next we show that for any $n \in \mathbb{Z}_{+}$,        
 \begin{equation*}
