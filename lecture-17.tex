@@ -2,7 +2,7 @@
 % !TEX spellcheck = LaTeX
 \documentclass[letterpaper,10pt,english]{article}
 \input{header}
-\title{Lecture-20: Random Processes}
+\title{Lecture-17: Random Processes}
 \author{}
 
 \begin{document}
@@ -115,7 +115,7 @@ finite subsets $I, J \subseteq T$ %such that $|I| =m, |J| = n$,
 P\left(\{X_i \leq x_i, i \in I \}\cap\{Y_j \leq y_j, j \in J\}\right) = P\left(\{X_i \leq x_i, i \in I\}\right)P\left(\{Y_j \leq y_j, j \in J\}\right).
 \end{align*}
 
-\subsection{Conditional Expectation and Filtration} 
+\subsection{Conditional Expectation} 
 Let $(\Omega, \sF, P)$ be the probability space.  
 Let $X$ be a measurable random variable on this probability space denoted as $X \in \sF$, 
 if the event $X^{-1}(-\infty, x] = \{\omega \in \Omega: X(\omega) \leq x\} \in \sF$ for each $x \in \R$.  
@@ -215,10 +215,19 @@ P(\Omega_i|A) = \frac{P(A|\Omega_i)P(\Omega_i)}{\sum_{j \in \N}P(A|\Omega_j)P(\O
 Result follows from the fact that $P(A|\sE) \in \sE$ and hence is a constant on each partition $\Omega_j$. % and $\sum_{j \in \N}1_{\Omega_j} = 1$.
 \end{proof}
 
-\subsubsection{Filtration}
-A net of $\sigma$-algebras $\{\sF_i \subseteq \sF: i \in I\}$ is called a \textbf{filtration} when the index set $I$ is totally ordered and the net is increasing, that is for all $i \leqslant j \in I$ implies $\sF_i \subseteq \sF_j$. 
-For a random process $X$ with an ordered index set $T$, we can define a filtration indexed by $T$, such that $\sF_t$ is the information about the process till index $t$, and 
+\subsection{Filtration}
+A net of $\sigma$-algebras $\cF = \{\sF_t \subseteq \sF: t \in T\}$ is called a \textbf{filtration} when the index set $T$ is totally ordered and the net is non-decreasing, that is for all $s \leqslant t \in T$ implies $\sF_s \subseteq \sF_t$. 
+Consider a random process $X$ indexed by the ordered set $T$ on the probability space $(\Omega, \sF, P)$. 
+The process $X$ is called \textbf{adapted} to the filtration $\cF$, if for each $t \in T$, we have the random variable $X_t \in \sF_t$. 
+For a random process $X$ with an ordered index set $T$, we can define a natural filtration $\cF = \{\sF_t \subseteq \sF: t \in T\}$ indexed by $T$, where  $\sF_t \triangleq \sigma(X_s, s \leqslant t)$ is the information about the process till index $t$ and 
+the process $X$ is adapted to its natural filtration by definition. 
+
+If $X = (X_t: t \in T)$ is an independent process with the associated natural filtration $\cF$, then for any $t > s$ and events $A \in \sF_s$, 
+$X_t$ is independent of the event $A$. 
+This is just a fancy way of saying $X_t$ is independent of $(X_u, u \le s)$. 
+Hence, for any random variable $Y \in \sF_s$, we have 
 \eq{
-\sF_t \triangleq \sigma(X_s, s \leqslant t).
+\E[\E[X_tY|\sF_s]] = \E[\E[X_t] Y] = \E X_t \E Y.
 }
+
 \end{document}
