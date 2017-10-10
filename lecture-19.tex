@@ -120,28 +120,39 @@ and hence has a Binomial $(n,p)$ distribution identical to that of $N_n$.
 \end{proof}
 
 \section{Random Walk}
-Let $X = (X_n: n \in \N)$ be an \emph{iid} Bernoulli sequence, with $P\{X_i = 1\} = p = 1 - P\{X_i = -1\}$. 
-Let $S_0 = 0$ and $S_n \triangleq \sum_{i=1}^nX_i$, then $(S_n: n \in \N)$ is an integer valued random sequence called a discrete one-dimensional integer \textbf{random walk} with unit step-size. % or simply \textbf{random walk}.  
-Then, we can think of $S_n$ as the random location of a particle on one-dimensional integer lattice after $n$ steps, 
+Let $X = (X_n \in \R^d: n \in \N)$ be an \emph{iid} random sequence. 
+Let $S_0 = 0$ and $S_n \triangleq \sum_{i=1}^nX_i$, then the process $S = (S_n: n \in \N)$ is called a \textbf{random walk}. 
+We can think of $S_n$ as the random location of a particle after $n$ steps, 
 where the particle starts from origin and takes steps of size $X_i$ at the $i$th step. 
+
 From previous section, we know following properties of random walks. 
+\begin{thm} 
+For a random walk $(S_n: n \in \N)$ with \emph{iid} step-size sequence $X$, the following are true. 
+\begin{enumerate}[i\_]
+\item The first two moments are $\E S_n = n\E X_i$ and $\Var[S_n] = n\Var[X_i]$. 
+\item Random walk is non-stationary with stationary and independent increments. 
+\end{enumerate}
+\end{thm}
+
+When $X$ is a Bernoulli sequence, with $P\{X_i = 1\} = p = 1 - P\{X_i = -1\}$, 
+the one dimensional random walk $S$ is an integer valued random sequence with unit step-size. 
 \begin{thm} 
 For a one-dimensional random walk $(S_n: n \in \N)$ with mean step-size $p-q$, the following are true. 
 \begin{enumerate}[i\_]
-\item The first two moments are $\E S_n = n(p-q)$ and $\Var[S_n] = n(1 - (p-q)^2)$. 
+%\item The first two moments are $\E S_n = n(p-q)$ and $\Var[S_n] = n(1 - (p-q)^2)$. 
 \item Number of positive steps after $n$ steps is Binomial $(n,p)$. 
-\item Random walk is non-stationary with stationary and independent increments. 
 \item $P\{S_n = k\} = \binom{n}{(n+k)/2}p^{(n+k)/2}q^{(n-k)/2}$ for $n+k$ even, and $0$ otherwise. 
 \end{enumerate}
 \end{thm}
 
 \section{Stopping Times}
-Let $(\Omega, \sF, P)$ be a probability space, $T$ be an ordered index set, and $(\sF_t \subseteq \sF: t \in T)$ be a filtration on this probability space. 
-A random variable $T$ is called a \textbf{stopping time} with respect to this filtration $\sF$ if the event $\{T \leq t\} \in \sF_t$. %and is independent of $\sF_s$ for $s > t$.  
+Let $(\Omega, \sF, P)$ be a probability space, and $(\sF_t: t \in T)$ be a filtration on this probability space for an ordered index set $T$.   
+A random variable $\tau \in \sF$ is called a \textbf{stopping time} with respect to this filtration if the event $\{\tau \leq t\} \in \sF_t$. 
 
 Let $\sF_t = \sigma(X_s, s \le t)$ for a random process $X = (X_t : t \in T)$. 
-Intuitively, if we observe the process in sequential order and $T$ denotes the stopping time of the process $X$. 
-Then, we have stopped after observing, $(X_s, s \le t)$, and before observing $(X_s, s > t)$. 
+Intuitively, if we observe the process $X$ in sequential order and $\tau \le t$ can be completely determined by observing $(X_s, s \le t)$. 
+%denotes a stopping time for the process $X$. 
+%Then, we have stopped after observing, $(X_s, s \le \tau)$, and before observing $(X_s, s > \tau)$.  
 The intuition behind a stopping time is that it's realization is determined by the past and present events but not by future events. 
 \begin{shaded*}
 \begin{exmp} Examples of stopping times.
