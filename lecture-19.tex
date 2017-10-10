@@ -155,14 +155,16 @@ For the special case when $T = \N$ is a countable ordered index set, then stoppi
 \subsection{Properties of stopping time} 
 
 %Let the index set $T$ be separable, and 
+\begin{lem}
 Let $\tau_1,\tau_2$ be two stopping times with respect to filtration $(\sF_t: t \in T)$.  
-Then the following holds true. 
+Then the following hold true. 
 \begin{enumerate}[i\_]
 \item $\min \{\tau_1,\tau_2\} $ is a stopping time. 
 \item If $T$ is countable, then $\tau_1+\tau_2$ is a stopping time.
 \end{enumerate}
+\end{lem}
 \begin{proof}
-Let $\cF = \{\sF_t : t \in T \} $ be a filtration, and $\tau_1,\tau_2$ associated stopping times. 
+Let $\cF = (\sF_t : t \in T)$ be a filtration, and $\tau_1,\tau_2$ associated stopping times. 
 \begin{enumerate}[i\_]
 \item Result follows since the event $\{ \min \{ \tau_1,\tau_2\} > t\} = \{\tau_1 > t\} \cap \{\tau_2 > t\} \in \sF_t$. 
 %\eq{
@@ -172,11 +174,79 @@ Let $\cF = \{\sF_t : t \in T \} $ be a filtration, and $\tau_1,\tau_2$ associate
 \item It suffices to show that the event $\{\tau_1+\tau_2 \leq  t\} \in \sF_t$ for $T = \N$. 
 To this end, we observe that 
 \eq{
-\{\tau_1 + \tau_2 \leq n\} = \bigcup_{k \in \N}\{\tau_1 \leq n - m, \tau_2 \leq m\} \in \sF_n.
+\{\tau_1 + \tau_2 \le n\} = \bigcup_{k \in \N}\{\tau_1 \le n - m, \tau_2 \le m\} \in \sF_n.
 }
 %Result follows since the events $\{\tau_1 \leq t -s \} \in \sF_{t-s} \subseteq \sF_{t}$ and $\{\tau_2 \leq s\} \subseteq \sF_s \subseteq \sF_t$. 
 \end{enumerate}
 \end{proof}
+
+\subsection{Stopping time $\sigma$-algebra}
+
+For a stopping time $\tau: \Omega \to \R_+$ adapted to the filtration $\cF$, 
+the \textbf{stopping time $\sigma$-algebra} is defined as 
+\eq{
+\sF_{\tau} \triangleq \{A \in \sF:  A \cap \{\tau \le t\} \in \sF_t, \forall t \ge 0\}.
+}
+One can check that $\sF_{\tau}$ is indeed a $\sigma$-algebra. 
+Further, $\sF_{\tau}$ has information up to the random time $\tau$. 
+\begin{lem} 
+Let $\tau, \tau_1, \tau_2$ be stopping times adapted to a filtration $\cF$. 
+Then, the following are true. 
+\begin{enumerate}[i\_]
+\item $\tau \in \sF_{\tau}$.
+\item If $\tau_1 \le \tau_2$ almost surely, then $\sF_{\tau_1} \subseteq \sF_{\tau_2}$. 
+\end{enumerate}
+\end{lem}
+\begin{proof}
+\end{proof}
+
+\subsection{Strong Markov property}
+Let $X$ be a real valued Markov process adapted to a filtration $\cF$. 
+Let $\tau$ be an almost surely finite stopping time with respect to to this filtration, 
+then the process $X$ is called \textbf{strongly Markov} if for all $x \in \R$ and $t > 0$, we have 
+\eq{
+P(\{X_{t+\tau} \le x\} |\sF_{\tau}) = P(\{X_{t+\tau} \le x\} |\sigma(X_{\tau})).
+}
+
+\begin{lem} 
+Let $(X_t: t \in T)$ be any Markov process adapted to filtration $(\sF_t: t \in T)$. 
+For any stopping time $\tau$ with respect to this filtration that takes only countably many values, 
+Markov process $X$ is strongly Markov at this stopping time $\tau$. 
+\end{lem}
+\begin{proof}
+\end{proof}
+
+\begin{cor}
+Any Markov process on countable index set $T$ is strongly Markov. 
+\end{cor}
+
+
+\section{Random Walk}
+Let $X = (X_n \in \R^d: n \in \N)$ be an \emph{iid} random sequence. 
+Let $S_0 = 0$ and $S_n \triangleq \sum_{i=1}^nX_i$, then the process $S = (S_n: n \in \N)$ is called a \textbf{random walk}. 
+We can think of $S_n$ as the random location of a particle after $n$ steps, 
+where the particle starts from origin and takes steps of size $X_i$ at the $i$th step. 
+
+From previous section, we know following properties of random walks. 
+\begin{thm} 
+For a random walk $(S_n: n \in \N)$ with \emph{iid} step-size sequence $X$, the following are true. 
+\begin{enumerate}[i\_]
+\item The first two moments are $\E S_n = n\E X_i$ and $\Var[S_n] = n\Var[X_i]$. 
+\item Random walk is non-stationary with stationary and independent increments. 
+\item For any measurable set $A \in \sF$, the hitting time  $\min\{n \in N: S_n \in A\}$ of the set $A$ by random walk $S$ is a stopping time adapted to the natural filtration $\cF = (\sF_n = \sigma(X_i, i \le n): n \in \N)$.
+\end{enumerate}
+\end{thm}
+
+When $X$ is a Bernoulli sequence, with $P\{X_i = 1\} = p = 1 - P\{X_i = -1\}$, 
+the one dimensional random walk $S$ is an integer valued random sequence with unit step-size. 
+\begin{thm} 
+For a one-dimensional random walk $(S_n: n \in \N)$ with mean step-size $p-q$, the following are true. 
+\begin{enumerate}[i\_]
+%\item The first two moments are $\E S_n = n(p-q)$ and $\Var[S_n] = n(1 - (p-q)^2)$. 
+\item Number of positive steps after $n$ steps is Binomial $(n,p)$. 
+\item $P\{S_n = k\} = \binom{n}{(n+k)/2}p^{(n+k)/2}q^{(n-k)/2}$ for $n+k$ even, and $0$ otherwise. 
+\end{enumerate}
+\end{thm}
 
 \begin{lem}[Wald's Lemma] 
 Consider a random walk $(S_n: n \in \N)$ with \emph{iid} step-sizes $(X_n: n \in \N)$ having finite mean $\E X_1$, adapted to its natural filtration $\cF = (\sF_n: n \in \N)$. 
@@ -216,21 +286,22 @@ We were able to do it since the summand is positive and we apply monotone conver
 %where the third equality follows from the fact that the expectation of a random variable being represented in terms of the \textit{ccdf} of the corresponding random variable.
 \end{proof}
 
+
 \todo{Edit from here.}
 
-\begin{prop}[Wald's Lemma for Renewal Process] \label{prop:WaldRenewal}
-	Let $\{X_n, n \in \N\}$ be \textit{iid} inter-arrival times of a renewal process $N(t)$ with $\E[X_1] < \infty$, and let $m(t) = \E[N(t)]$ be its renewal function. Then, $N(t)+1$ is a stopping time and 
-	\begin{align*}
-	\E\left[\sum_{i=1}^{N(t)+1}X_i\right] = \E[X_1][1+m(t)].
-	\end{align*}
-\end{prop}
-\begin{proof} It is easy to see that $\{N(t)+1=n\}$ depends solely on $\{X_1,\ldots,X_n\}$ from the discussion below.
-	\begin{align*}
-	\left\{N(t) + 1 = n \right\} \iff \{S_{n-1} \leq t < S_n\} \iff \left\{\sum_{i=1}^{n-1} X_i \leq t < \sum_{i=1}^{n-1} X_i + X_n\right\}.
-	\end{align*}
-	Thus $N(t)+1$ is a stopping time, and the result follows from Wald's Lemma.
-\end{proof}
-\subsection{Strong Markov Property}
+%\begin{prop}[Wald's Lemma for Renewal Process] \label{prop:WaldRenewal}
+%	Let $\{X_n, n \in \N\}$ be \textit{iid} inter-arrival times of a renewal process $N(t)$ with $\E[X_1] < \infty$, and let $m(t) = \E[N(t)]$ be its renewal function. Then, $N(t)+1$ is a stopping time and 
+%	\begin{align*}
+%	\E\left[\sum_{i=1}^{N(t)+1}X_i\right] = \E[X_1][1+m(t)].
+%	\end{align*}
+%\end{prop}
+%\begin{proof} It is easy to see that $\{N(t)+1=n\}$ depends solely on $\{X_1,\ldots,X_n\}$ from the discussion below.
+%	\begin{align*}
+%	\left\{N(t) + 1 = n \right\} \iff \{S_{n-1} \leq t < S_n\} \iff \left\{\sum_{i=1}^{n-1} X_i \leq t < \sum_{i=1}^{n-1} X_i + X_n\right\}.
+%	\end{align*}
+%	Thus $N(t)+1$ is a stopping time, and the result follows from Wald's Lemma.
+%\end{proof}
+
 
 \section{Times of Successes}
 For the above experiment, let $T_k$ denote the trial number corresponding to $k$th success. 
@@ -333,31 +404,5 @@ P\{T_{k+1} - T_k > m + n| T_{k+1} - T_k > m \} = \frac{P\{T_{k+1}-T_k > m+n\}}{P
 }
 \end{proof}
 
-\section{Random Walk}
-Let $X = (X_n \in \R^d: n \in \N)$ be an \emph{iid} random sequence. 
-Let $S_0 = 0$ and $S_n \triangleq \sum_{i=1}^nX_i$, then the process $S = (S_n: n \in \N)$ is called a \textbf{random walk}. 
-We can think of $S_n$ as the random location of a particle after $n$ steps, 
-where the particle starts from origin and takes steps of size $X_i$ at the $i$th step. 
-
-From previous section, we know following properties of random walks. 
-\begin{thm} 
-For a random walk $(S_n: n \in \N)$ with \emph{iid} step-size sequence $X$, the following are true. 
-\begin{enumerate}[i\_]
-\item The first two moments are $\E S_n = n\E X_i$ and $\Var[S_n] = n\Var[X_i]$. 
-\item Random walk is non-stationary with stationary and independent increments. 
-\item For any measurable set $A \in \sF$, the hitting time of the set $A$ by random walk $S$ is a $\min\{n \in N: S_n \in A\}$ is a stopping time adapted to the natural filtration $\cF = (\sF_n = \sigma(X_i, i \le n): n \in \N)$.
-\end{enumerate}
-\end{thm}
-
-When $X$ is a Bernoulli sequence, with $P\{X_i = 1\} = p = 1 - P\{X_i = -1\}$, 
-the one dimensional random walk $S$ is an integer valued random sequence with unit step-size. 
-\begin{thm} 
-For a one-dimensional random walk $(S_n: n \in \N)$ with mean step-size $p-q$, the following are true. 
-\begin{enumerate}[i\_]
-%\item The first two moments are $\E S_n = n(p-q)$ and $\Var[S_n] = n(1 - (p-q)^2)$. 
-\item Number of positive steps after $n$ steps is Binomial $(n,p)$. 
-\item $P\{S_n = k\} = \binom{n}{(n+k)/2}p^{(n+k)/2}q^{(n-k)/2}$ for $n+k$ even, and $0$ otherwise. 
-\end{enumerate}
-\end{thm}
 
 \end{document}
