@@ -1,0 +1,206 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amscd}
+\usepackage{graphics}
+%\usepackage[dvips]{graphicx}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{eqparbox}
+\usepackage[bookmarks=false]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+
+\addtolength{\oddsidemargin}{-.750in}% Controls page offset - Left
+\addtolength{\voffset}{-.125in}      % Controls page offset - Top
+\addtolength{\textwidth}{1.0in}      % Controls Text width
+\addtolength{\textheight}{1.125in}       % Controls Text height
+
+\renewcommand{\baselinestretch}{1} % Controls line spacing
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\lhead{E2-202 Random Processes}
+\rhead{Dept. of ECE, IISc}
+\title {\sc Random Variables - Examples $\&$ Exercises}
+\date{Aug. 24 2017}
+\author{Prepared By: Karthik}
+\begin{document}
+\maketitle 
+\pagestyle{fancy}
+
+Assume $(\Omega,\mathcal{F},P)$ is a probability space.
+\begin{enumerate}
+%\item \emph{Let $X:\Omega\to \mathbb{R}$ be a random variable defined with respect to $\mathcal{F}$. If $F_{X}(\cdot)$ denotes the CDF of $X$, show that $F_{X}(x)$ is right continuous at every point $x\in \mathbb{R}$. When is $F_{X}(x)$ also left continuous at the point $x$?}\\
+%
+%\par We know that $F_{X}(x)=P(\{\omega\in \Omega:X(\omega)\leq x\})$.
+	
+\item \emph{If $X:\Omega\to \mathbb{R}$ is a random variable defined with respect to $\mathcal{F}$, and $a\in \mathbb{R}$ is any constant, show that $Y=aX$ is also a random variable with respect to $\mathcal{F}$}.\\
+	
+\par $Y=aX$ is a function defined as $Y(\omega)=aX(\omega)$, $\omega\in \Omega$. Since $X$ is given to be a random variable, the following statements are equivalent to \eqref{eq:defn_X_rv}:
+\begin{align}
+\{\omega\in \Omega:X(\omega)\leq y\}\in \mathcal{F}~&\text{for all }y\in \mathbb{R},\label{eq:def_1X_rv}\\
+\{\omega\in \Omega:X(\omega)\geq y\}\in \mathcal{F}~&\text{for all }y\in \mathbb{R},\label{eq:def_2X_rv}\\
+\{\omega\in \Omega:X(\omega)< y\}\in \mathcal{F}~&\text{for all }y\in \mathbb{R},\label{eq:def_3X_rv}\\
+\{\omega\in \Omega:X(\omega)> y\}\in \mathcal{F}~&\text{for all }y\in \mathbb{R}\label{eq:def_4X_rv}.
+\end{align}
+In order to show that $Y$ is a random variable, it suffices to show that 
+\begin{equation}
+\{\omega\in \Omega:Y(\omega)\leq x\}=\{\omega\in \Omega:aX(\omega)\leq x\}\in \mathcal{F}~\text{for all }x\in \mathbb{R}.
+\end{equation}
+\begin{enumerate}[(a)]
+	\item \underline{Case 1}: Suppose $a=0$. Then,
+	\begin{align}
+	\{\omega\in \Omega:Y(\omega)\leq x\}&=\{\omega\in \Omega:aX(\omega)\leq x\}\nonumber\\
+	                                    &=\{\omega\in \Omega:0\leq x\}\nonumber\\
+	                                    &=\begin{cases}
+	                                    \phi,~x<0\\
+	                                    \Omega,~x\geq 0.
+	                                    \end{cases}
+	\end{align}
+	From the above description, it is clear that $\{\omega\in \Omega:Y(\omega)\leq x\}\in \mathcal{F}$ for all $x\in \mathbb{R}$. Thus, $Y=aX$ is a random variable when $a=0$.
+	
+	\item \underline{Case 2}: Suppose $a>0$. Then, for any $x\in \mathbb{R}$,
+	\begin{align}
+	\{\omega\in \Omega:Y(\omega)\leq x\}&=\{\omega\in \Omega:aX(\omega)\leq x\}\nonumber\\
+ 	                                    &=\left\lbrace\omega\in\Omega: X(\omega)\leq \frac{x}{a}\right\rbrace\in \mathcal{F}
+	\end{align}
+	since \eqref{eq:def_1X_rv} holds with $y=\frac{x}{a}$. Thus, $Y=aX$ is a random variable for any $a>0$.
+	
+	\item \underline{Case 3}: Suppose $a<0$. Then, for any $x\in \mathbb{R}$,
+	\begin{align}
+	\{\omega\in \Omega:Y(\omega)\leq x\}&=\{\omega\in \Omega:aX(\omega)\leq x\}\nonumber\\
+	&=\left\lbrace\omega\in\Omega: X(\omega)\geq \frac{x}{a}\right\rbrace\in \mathcal{F}
+	\end{align}
+	since \eqref{eq:def_2X_rv} holds with $y=\frac{x}{a}$. Thus, $Y=aX$ is a random variable for any $a<0$.\\
+\end{enumerate}
+
+
+\item \emph{If $X$ and $Y$ are two random variables defined with respect to $\mathcal{F}$, show that $X+Y$ is also a random variable with respect to $\mathcal{F}$.}
+
+\par Since $X$ and $Y$ are given to be random variables, by definition,
+\begin{align}
+\{\omega\in \Omega:X(\omega)< y\}\in \mathcal{F}~&\text{for all }y\in \mathbb{R},\label{eq:def5_X_rv}\\
+\{\omega\in \Omega:Y(\omega)< y\}\in \mathcal{F}~&\text{for all }y\in \mathbb{R}.\label{eq:def6_Y_rv}
+\end{align}
+In order to show that $X+Y$ is a random variable, it suffices to show that
+\begin{eqnarray}
+\{\omega\in \Omega:X(\omega)+Y(\omega)< x\}\in \mathcal{F}~\text{for all }x\in \mathbb{R}.\label{eq:def_X+Y_rv}
+\end{eqnarray}
+Fix an arbitrary $x\in \mathbb{R}$. Then, $X(\omega)+Y(\omega)< x$ implies that there exists a rational number $q\in \mathbb{Q}$ such that $X(\omega) < q$ and $Y(\omega) < x-q$. Conversely, if there exists a rational number $q\in \mathbb{Q}$ such that $X(\omega)< q$ and $Y(\omega)< x-q$, then this implies that $X(\omega)+Y(\omega)< x$. By translating the words ``there exists'' and ``and'' into union and intersection of sets respectively, we get that
+\begin{align}
+\{\omega\in \Omega:X(\omega)+Y(\omega)< x\}&=\bigcup\limits_{q\in \mathbb{Q}}\underbrace{\left(\underbrace{\{\omega\in \Omega:X(\omega)<q\}}_{\in\, \mathcal{F}~\text{from }\eqref{eq:def5_X_rv}~\text{with } y=q} \cap \underbrace{\{\omega\in \Omega:Y(\omega)< x-q\}}_{\in\, \mathcal{F}~\text{from }\eqref{eq:def6_Y_rv}~\text{with } y=x-q}\right)}_{\in\, \mathcal{F}\text{ since intersection of two events in }\mathcal{F}\text{ belongs to }\mathcal{F}}\nonumber
+\end{align}
+belongs to $\mathcal{F}$ since the union over $z\in \mathbb{Z}$ is a countable union, and countable union of events in $\mathcal{F}$ belongs to $\mathcal{F}$ by the property that $\mathcal{F}$ is a $\sigma$-algebra. Thus, $X+Y$ is a random variable.\\
+
+\par \emph{\underline{Note 1}: In the above analysis, it is crucial that $X$ and $Y$ are both defined with respect to $\mathcal{F}$. In other words, if $X$ is defined with respect to $\mathcal{F}$ and $Y$ is defined with respect to a different $\sigma$-algebra $\mathcal{G}$, then $X+Y$ is not a meaningful definition.}\\
+
+\par \emph{\underline{Note 2}: The above problem can also be solved using the fact that a continuous function of random variables is a random variable.}\\
+\vspace{0.2cm}
+
+\item \emph{If $X$ and $Y$ are random variables defined with respect to $\mathcal{F}$, show that $\max\{X,Y\}$ is also a random variable with respect to $\mathcal{F}$}.
+
+\par Since $X$ and $Y$ are given to be random variables, by definition,
+\begin{align}
+\{\omega\in \Omega:X(\omega)\leq y\}\in \mathcal{F}~&\text{for all }y\in \mathbb{R},\label{eq:def7_X_rv}\\
+\{\omega\in \Omega:Y(\omega)\leq y\}\in \mathcal{F}~&\text{for all }y\in \mathbb{R}.\label{eq:def8_Y_rv}
+\end{align}
+We need to show that
+\begin{eqnarray}
+\{\omega\in \Omega:\max\{X(\omega),Y(\omega)\}\leq x\}\in \mathcal{F}~\text{for all }x\in \mathbb{R}.\label{eq:def_max_XY_rv}
+\end{eqnarray}
+Fix an arbitrary $x\in \mathbb{R}$. Then, $\max\{X(\omega),Y(\omega)\}\leq x$ implies that $X(\omega)\leq x$ and $Y(\omega)\leq x$, and the converse is also true. Thus,
+\begin{equation}
+\{\omega\in \Omega:\max\{X(\omega),Y(\omega)\}\leq x\}=\underbrace{\{\omega\in \Omega:X(\omega)\leq x\}}_{\in\, \mathcal{F}~\text{from }\eqref{eq:def7_X_rv}~\text{with } y=x} \cap \underbrace{\{\omega\in \Omega:Y(\omega)\leq x\}}_{\in\, \mathcal{F}~\text{from }\eqref{eq:def8_Y_rv}~\text{with } y=x}
+\end{equation}
+belongs to $\mathcal{F}$ since intersection of two events in a $\mathcal{F}$ belongs to $\mathcal{F}$ by the property that $\mathcal{F}$ is a $\sigma$-algebra. Hence $\max\{X,Y\}$ is a random variable.
+\vspace{0.2cm}\\
+
+\item \emph{Show that if $X$ is a random variable defined with respect to $\mathcal{F}$, then $X^{2}$ is also a random variable defined with respect to $\mathcal{F}$.}
+
+\par Since $X$ is given to be a random variable, by definition,
+\begin{align}
+\{\omega\in \Omega:X(\omega)\leq y\}\in \mathcal{F}~&\text{for all }y\in \mathbb{R},\label{eq:def_X_rv}\\
+\{\omega\in \Omega:X(\omega)\geq y\}\in \mathcal{F}~&\text{for all }y\in \mathbb{R}.\label{eq:def_X_alt_rv}
+\end{align}
+We need to show that
+\begin{eqnarray}
+\{\omega\in \Omega:(X(\omega))^{2}\leq x\}\in \mathcal{F}~\text{for all }x\in \mathbb{R}.\label{eq:def_max_X2_rv}
+\end{eqnarray}
+Clearly, since $(X(\omega))^{2}$ is a non-negative real number, $\{\omega\in \Omega:(X(\omega))^{2}\leq x\}=\phi$ for all $x<0$. Fix an arbitrary $x\geq 0$. Then,
+\begin{align}
+\{\omega\in \Omega:(X(\omega))^{2}\leq x\}&=\{\omega\in \Omega:|X(\omega)|\leq \sqrt{x}\}\nonumber\\
+                                          &=\{\omega\in \Omega:-\sqrt{x}\leq X(\omega) \leq \sqrt{x}\}\nonumber\\
+                                          &=\underbrace{\{\omega\in \Omega:-\sqrt{x}\leq X(\omega)\}}_{\in\, \mathcal{F}~\text{from }\eqref{eq:def_X_alt_rv}~\text{with } y=-\sqrt{x}}\cap \underbrace{\{\omega\in \Omega:X(\omega) \leq \sqrt{x}\}}_{\in\, \mathcal{F}~\text{from }\eqref{eq:def_X_rv}~\text{with } y=\sqrt{x}}
+\end{align}
+belongs to $\mathcal{F}$ since intersection of two events in $\mathcal{F}$ belongs to $\mathcal{F}$ by the property that $\mathcal{F}$ is a $\sigma$-algebra. Hence $X^{2}$ is a random variable.
+
+\item Let $(\Omega,\mathcal{F})=(\mathbb{R},\mathcal{B})$, where $\mathcal{B}$ denotes the Borel $\sigma$-algebra of subsets of $\mathbb{R}$. If $B\in \mathcal{B}$, then $B$ is known as a \emph{Borel set}. Let $f:\mathbb{R}\to \mathbb{R}$ be a real-valued function defined on $\mathbb{R}$. Then, $f$ is said to be a \textbf{Borel measurable function} if:
+\begin{equation}
+f^{-1}(B)\in \mathcal{B}~\text{for all }B\in \mathcal{B},
+\end{equation}
+i.e., if the inverse image (under $f$) of every Borel set is a Borel set.
+\vspace{0.2cm}\\
+
+\item \emph{If $X:\Omega\to \mathbb{R}$ is a random variable defined with respect to $\mathcal{F}$ and $f:\mathbb{R}\to \mathbb{R}$ is Borel measurable, show that $f(X):\Omega\to \mathbb{R}$ is also a random variable with respect to $\mathcal{F}$.}
+
+\par Since $X$ is a random variable, by definition,
+\begin{equation}
+X^{-1}(A)\in \mathcal{F}~\text{for every }A\in \mathcal{B},\label{eq:defn_X_rv}
+\end{equation}
+and since $f$ is Borel measurable, 
+\begin{equation}
+f^{-1}(B)\in \mathcal{B}~\text{for all }B\in \mathcal{B}.\label{eq:f_Borel_mble}
+\end{equation}
+In order to show that $g=f(X)$ is a random variable, we need to show that
+\begin{equation}
+g^{-1}(B)\in \mathcal{F}~\text{for every }B\in \mathcal{B}.
+\end{equation}
+Fix an arbitrary $B\in \mathcal{B}$. Then, 
+\begin{align}
+g^{-1}(B)&=(f(X))^{-1}(B)\nonumber\\
+&=X^{-1}(f^{-1}(B))\nonumber\\
+&=X^{-1}(A)\nonumber\\
+&\in \mathcal{F},
+\end{align}
+where $A=f^{-1}(B)\in \mathcal{B}$ from \eqref{eq:f_Borel_mble} since $f$ is Borel measurable, and $X^{-1}(A)\in \mathcal{F}$ from \eqref{eq:defn_X_rv} since $X$ is a random variable.\\
+\end{enumerate}
+
+\textbf{\underline{Remark:}} Every continuous function is Borel measurable. Hence, if $X:\Omega\to \mathbb{R}$ is a random variable defined with respect to $\mathcal{F}$, and $f:\mathbb{R}\to \mathbb{R}$ is continuous, then $f(X):\Omega\to \mathbb{R}$ is also a random variable with respect to $\mathcal{F}$. Thus, for example, if $X$ is a random variable, so are $|X|$, $e^{X}$, $X^{2}$, $\sin(X)$, $aX+b$ (for any $a,b\in \mathbb{R}$), etc. On similar lines, if $X$ and $Y$ are random variables defined with respect to $\mathcal{F}$, then so are $X+Y$, $X-Y$, $\log(|X+Y|)$, etc.\\
+\vspace{0.2cm}\\
+
+\par \textbf{Miscellaneous exercises:} 
+\par
+Assume $(\Omega,\mathcal{F},P)$ is a probability space, and all random variables defined below are functions on $\Omega$.
+\begin{enumerate}
+	\item If $X$ and $Y$ are random variables defined with respect to $\mathcal{F}$, show that the following are also random variables defined with respect to $\mathcal{F}$ (\textbf{do not} use the fact that continuous functions of random variables are random variables):
+	\begin{enumerate}[(i)]
+	    \item $|X|$, $|Y|$
+		\item $X-Y$
+		\item $XY$
+		\item $\min\{X,Y\}$
+		\item $X_{+}:=\max\{X,0\}$, $X_{-}:=-\min\{X,0\}$
+		\item $|X-Y|$.
+	\end{enumerate}
+
+    \item If $X$ and $Y$ are random variables defined with respect to $\mathcal{F}$, show that 
+    \begin{eqnarray}
+    \{\omega\in \Omega:X(\omega)=Y(\omega)\}\in \mathcal{F}.\nonumber
+    \end{eqnarray}
+    \item Let $X:\Omega\to \mathbb{R}\cup \{-\infty,+\infty\}$ be a random variable defined with respect to $\mathcal{F}$. Then, show that $\{\omega\in \Omega:|X(\omega)|=\infty\}\in \mathcal{F}$ (in this example, $X$ is allowed to take the values $-\infty$ and $+\infty$).
+    \item Prove, by induction, that for any $n\geq 1$, if $X_{1},\ldots,X_{n}$ are random variables, all defined with respect to $\mathcal{F}$, then the following are also random variables with respect to $\mathcal{F}$:
+    \begin{enumerate}[(a)]
+    	\item $\frac{X_{1}+\ldots+X_{n}}{n}$
+    	\item $\frac{X_{1}+\ldots+X_{n}}{\sqrt{n}}$.
+    \end{enumerate}
+    \item Let $X$ be a random variable defined with respect to $\mathcal{F}$, and suppose $X_{1},X_{2},\ldots$ is a sequence of random variables, all defined with respect to $\mathcal{F}$. Then, show that for any $\epsilon>0$,
+    \begin{equation}
+    \{\omega\in \Omega:|X_{n}(\omega)-X(\omega)|>\epsilon\}\in \mathcal{F}~\text{for all }n\geq 1\nonumber.
+    \end{equation} 
+\end{enumerate}
+\end{document}

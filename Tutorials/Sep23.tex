@@ -1,0 +1,130 @@
+\documentclass[11pt]{article}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\addtolength{\oddsidemargin}{-.750in}% Controls page offset - Left
+\addtolength{\voffset}{-.125in}      % Controls page offset - Top
+\addtolength{\textwidth}{1.0in}      % Controls Text width
+\addtolength{\textheight}{1.125in}       % Controls Text height
+\renewcommand{\baselinestretch}{1} % Controls line spacing
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+\title {\sc Moment generating function, Characteristic function and Gaussian random vectors - Some exercises}
+\author{$E2-202$ - Random Processes, Fall $2017$, ECE, IISc.\\Prepared by - Karthik and Sahasranand}
+\date{\today}
+
+\begin{document}
+\maketitle 
+
+\begin{enumerate}
+\item Show that for $X \sim \mathcal{N}(0,\sigma^2)$ and any $\epsilon >0$, 
+\begin{enumerate}
+\item $P[X \ge \epsilon] \le e^{\frac{-\epsilon^2}{2\sigma^2}}$
+\item $P[|X| \ge \epsilon] \le 2e^{\frac{-\epsilon^2}{2\sigma^2}}$.
+\end{enumerate}
+\emph{Hint:} Calculate the MGF of $\mathcal{N}(0,\sigma^2)$; use Markov's inequality.
+
+\item Calculate the MGF $M_X(t)$ of $X \sim \mathcal{N}(\mu, \sigma^2)$. Verify that
+\begin{enumerate}
+\item $M_X'(0) = E[X] = \mu$, and
+\item $M_X''(0) = E[X^2] = \sigma^2 + \mu^2$.
+\end{enumerate}
+
+\item Compute the MGF of the following distributions.
+\begin{enumerate}
+\item Ber($p$), $0 \le p \le 1$
+\item Bin($n,p$), $0 \le p \le 1, n \in \mathbb{Z}^+$
+\item Geo($p$), $0 \le p \le 1$
+\item Poi($\lambda$), $\lambda > 0$
+\item Exp($\lambda$), $\lambda > 0$
+\end{enumerate}
+
+\item Compute the characteristic function of the following distributions.
+\begin{enumerate}
+\item Ber($p$), $0 \le p \le 1$
+\item Bin($n,p$), $0 \le p \le 1, n \in \mathbb{Z}^+$
+\item Poi($\lambda$), $\lambda > 0$
+\item Unif($-a,a$), $a > 0$
+\item $\mathcal{N}(0,1)$
+\end{enumerate}
+
+\item 
+\begin{enumerate}
+	\item Verify that for any $a,b\in \mathbb{R}$, 
+	\begin{equation*}
+	\Phi_{aX+b}(\omega)=e^{jb\omega}\cdot \Phi_{X}(a\omega)\quad \forall\omega\in \mathbb{R}.
+	\end{equation*} 
+	\item Show that 
+	\begin{equation*}
+	\overline{\Phi_{X}(\omega)}=\Phi_{X}(-\omega)\quad \forall\omega\in \mathbb{R}.
+	\end{equation*} 
+	\emph{Note: For a complex number $z=x+jy$,  $\bar{z}$ denotes its complex conjugate, i.e., $\bar{z}=x-jy$.}
+	\item Show that $\Phi_{X}(\omega)$ is a real-valued function of $\omega$ if and only if the distribution of $X$ is symmetric (i.e., $X$ and $-X$ have the same distribution). 
+\end{enumerate}
+
+\item Let $X\sim \mathcal{N}(\mu,\sigma^{2})$. Using the characteristic function of $X$, derive the distribution of $Y=\dfrac{X-\mu}{\sigma}$.
+
+\item Let $X=(X_{1},X_{2},X_{3})$ be a zero mean Gaussian random vector with covariance matrix 
+\begin{equation*}
+K=
+\begin{pmatrix}
+1&2&3\\
+2&4&6\\
+3&6&9
+\end{pmatrix}.
+\end{equation*}
+\begin{enumerate}
+	\item Write down the distributions of $X_{1}$, $X_{2}$ and $X_{3}$.
+	\item Does a joint density exist for $X$? If not, what is the relationship between $X_{1}$, $X_{2}$ and $X_{3}$?
+	\item Does a joint density exist for $X'=(X_{1},X_{2})$? If not, what is the relationship between $X_{1}$ and $X_{2}$?
+	\item Does a joint density exist for $Y'=(X_{2},X_{3})$? If not, what is the relationship between $X_{2}$ and $X_{3}$?
+	\item Does a joint density exist for $Z'=(X_{1},X_{3})$? If not, what is the relationship between $X_{1}$ and $X_{3}$?
+\end{enumerate}
+\item \emph{Rotation of a joint normal distribution yielding independence -- } \\Let $X$ be a Gaussian random vector with
+\[
+E[X] = \left[
+\begin{array}{c}
+10\\
+5    
+\end{array}
+\right],
+~~~ \text{Cov}(X) = \left[
+\begin{array}{cccc}
+3 & 2\\
+2 & 3\\
+\end{array}
+\right]
+\]
+\begin{enumerate}
+	\item Compute the pdf of $X$ explicitly.
+	\item Find a vector $b$ and an orthogonal matrix $U$ such that the vector $Y = [Y_1 ~Y_2]^T$ defined by $Y = U(X-b)$ is a mean zero Gaussian vector such that $Y_1$ and $Y_2$ are independent.
+\end{enumerate}
+\emph{Remark -- Indeed, a set of $n$ random variables $Z_{1},\ldots,Z_{n}$ is jointly Gaussian if and only if:
+	\begin{enumerate}
+		\item there exists an integer $l\geq 1$,
+		\item there exists an $(n\times l)$ matrix $A$ and a vector $b=(b_{1},\ldots,b_{n})\in \mathbb{R}^{n}$, and
+		\item there exist iid $\mathcal{N}(0,1)$ random variables $W_{1},\ldots,W_{l}$
+	\end{enumerate}
+	such that
+	\begin{equation*}
+	\begin{pmatrix}
+	Z_{1}\\
+	\vdots\\
+	Z_{n}
+	\end{pmatrix}=A\cdot \begin{pmatrix}
+	W_{1}\\
+	\vdots\\
+	\vdots\\
+	W_{l}
+	\end{pmatrix} + \begin{pmatrix}
+	b_{1}\\
+	\vdots\\
+	b_{n}
+	\end{pmatrix}.
+	\end{equation*}
+	This can be used as an alternative definition for jointly Gaussian random variables, and it can be shown that this definition is equivalent to the ones stated in class. Notice here that $l$ can be greater than, equal to or less than $n$.}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,59 @@
+\documentclass[11pt]{article}
+\usepackage{epsfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\addtolength{\oddsidemargin}{-.750in}% Controls page offset - Left
+\addtolength{\voffset}{-.125in}      % Controls page offset - Top
+\addtolength{\textwidth}{1.0in}      % Controls Text width
+\addtolength{\textheight}{1.125in}       % Controls Text height
+\renewcommand{\baselinestretch}{1} % Controls line spacing
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+\title {\sc Joint and Conditional Distributions - Some exercises}
+\author{$E2-202$ - Random Processes, Fall $2017$, ECE, IISc.\\Prepared by - Karthik and Sahasranand}
+\date{Sep. 6 2017}
+
+\begin{document}
+\maketitle 
+
+\begin{enumerate}
+\item Let $X$ and $Y$ have a joint pdf
+\[
+f(x,y) = x+y, \hspace{0.2cm} 0 \le x \le 1, 0 \le y \le 1. 
+\] 
+Are $X$ and $Y$ independent?
+
+\item $X$ and $Y$ are jointly continuous with joint pdf
+\[
+f(x)=
+\begin{cases}
+cx^2 + \frac{xy}{3}, \text{ if } 0 \le x \le 1, 0 \le y \le 2\\
+0, \text{ otherwise.}
+\end{cases}
+\]
+\begin{enumerate}
+\item Find $c$.
+\item Are $X$ and $Y$ independent?
+\item Calculate $\text{Cov}(X,Y)$.
+\end{enumerate}
+
+\item Let $X$ and $Y$ be independent random variables distributed uniformly on $[0,1]$. Let $U = \min\{X,Y\}$ and $V = \max\{X,Y\}$. Calculate $\text{Cov}(U,V)$.
+\item Suppose $X_{1},X_{2},\ldots$ are independent random variables distributed uniformly on $(0,1)$.
+\begin{enumerate}
+	\item Let $N=\min\{n\geq 1:X_{n+1}>X_{n}\}$. Find the CDF of $N$ and $E[N]$.
+	\item Let $N=\min\{n\geq 1:\sum\limits_{k=1}^{n}X_{k}\geq 1\}$. Find the CDF of $N$ and $E[N]$.
+\end{enumerate}
+\item Let $(\Omega,\mathcal{F},P)$ be a probability space, and let $X:\Omega\to [0,\infty)$ be a nonnegative random variable defined with respect to $\mathcal{F}$. If $E[X]=0$, then show that $P(X=0)=1$.
+\item Suppose $(U,V )$ is uniformly distributed over the square with corners $ (0,0) $, $ (1,0) $, $ (1,1) $, and $ (0,1) $, and
+let $ X = UV $ . Find the CDF and pdf of $ X $.
+\item 
+\begin{enumerate}
+    \item Give an example for a distribution whose mean and variance are finite.
+	\item Produce an example for a distribution whose mean is finite but variance is infinite.
+	\item Produce an example for a distribution whose mean and variance are infinite (note that you are required to produce an example such that mean exists and equals $+\infty$). 
+\end{enumerate}
+\end{enumerate}
+\end{document}
